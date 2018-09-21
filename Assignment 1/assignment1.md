@@ -96,7 +96,26 @@ Describe an algorithm that finds a local minimum in an array \(A\) in time \(O(\
 
 ---
 
-- https://stackoverflow.com/questions/12238241/find-local-minima-in-an-array
+```julia
+function local_minimum_search(arr, low, high, n)
+    mid = low + div(high - low, 2)
+    if (mid == 1) | (arr[mid-1] > arr[mid]) &
+       (mid == n) | (arr[mid] < arr[mid+1])
+        return mid
+    elseif (mid > 1) & (arr[mid-1] < arr[mid])
+        return local_minimum_search(arr, low, mid-1, n)
+    else
+        return local_minimum_search(arr, mid+1, high, n)
+    end
+end
+
+function local_minimum(arr)
+  n = length(arr)
+  return local_min_util(arr, 1, n, n)
+end
+```
+
+- https://www.geeksforgeeks.org/find-local-minima-array/
 
 
 ## Question 6
