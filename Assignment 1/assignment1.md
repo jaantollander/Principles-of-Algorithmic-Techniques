@@ -74,19 +74,20 @@ The pseudocode implementation (in Julia style) of the algorithm.
 
 ```julia
 function sum(A)
-  if lenght(A) == 1
+  n = lenght(A)
+  if n == 1
     # If the array A has only one element return the element.
     return A[1] # 1-based indexing
   else
     # Otherwise divide the array into equal sized subarrays and
     # then add the sums of the subarrays together.
-    B, C = divide(A)
-    return sum(B) + sum(C)
+    mid = div(n, 2)
+    return sum(A[1:mid]) + sum(A[(mid+1):end])
   end
 end
 ```
 
-In the running time analysis we assume that operations  `length`, `[]` (indexing) and `divide` on arrays are constant time. We also assume that addition `+` of two numbers is constant time. The recurrence relation therefore is of form \[T(n)=2 T(⌈n/2⌉) + O(1).\] By using the *master theorem*, the runningtime of the algorithm is \[T(n)=O(n).\] As we can see, the divide and conquer algorithm for the summation is no better than direct summation term by term.
+In the running time analysis we assume that operations  `length` and `[]` (indexing and slicing) on arrays are constant time operations. We also assume that addition `+` and integer division `div` of two numbers are constant time operations. The recurrence relation therefore is of form \[T(n)=2 T(⌈n/2⌉) + O(1).\] By using the *master theorem*, the runningtime of the algorithm is \[T(n)=O(n).\] As we can see, the divide and conquer algorithm for the summation is no better than direct summation term by term.
 
 
 ## Question 5
@@ -99,10 +100,10 @@ Describe an algorithm that finds a local minimum in an array \(A\) in time \(O(\
 ```julia
 function local_minimum_search(arr, low, high, n)
     mid = low + div(high - low, 2)
-    if (mid == 1) | (arr[mid-1] > arr[mid]) &
-       (mid == n) | (arr[mid] < arr[mid+1])
+    if ((mid == 1) || (arr[mid] < arr[mid-1])) &&
+       ((mid == n) || (arr[mid] < arr[mid+1]))
         return mid
-    elseif (mid > 1) & (arr[mid-1] < arr[mid])
+    elseif (mid > 1) && (arr[mid-1] < arr[mid])
         return local_minimum_search(arr, low, mid-1, n)
     else
         return local_minimum_search(arr, mid+1, high, n)
@@ -111,9 +112,35 @@ end
 
 function local_minimum(arr)
   n = length(arr)
-  return local_min_util(arr, 1, n, n)
+  # Returns the index of the local minimum
+  return local_minimum_search(arr, 1, n, n)
 end
 ```
+
+**Input**: An array \(A=⟨a_1,…,a_n⟩\).
+
+**Output**: An element \(a_i\) such that is meets the requirement of being *locally minimum*.
+
+\[
+\begin{cases}
+a_i < a_{i+1} & i = 1 \\
+a_i < a_{i-1} & i = n \\
+a_i = \min(a_{i-1}, a_i, a_{i+1}) & \text{otherwise}
+\end{cases}
+\]
+
+It should be noted that \(a_i = \min(a_{i-1}, a_i, a_{i+1})\) is equivalent to \((a_i ≤ a_{i-1}) ∧ (a_i ≤ a_{i+1})\).
+
+**Divide and Conquer**: The algorithm works like a binary search. First it finds the middle index of the current slice of the array \(A\).
+
+\[mid = low + ⌊(high-low)/2⌋\]
+
+1) **Base Case**: ...
+
+2) **Recursive Case**: ...
+
+
+---
 
 - https://www.geeksforgeeks.org/find-local-minima-array/
 
