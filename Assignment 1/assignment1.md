@@ -97,26 +97,6 @@ Describe an algorithm that finds a local minimum in an array \(A\) in time \(O(\
 
 ---
 
-```julia
-function local_minimum_search(arr, low, high, n)
-    mid = low + div(high - low, 2)
-    if ((mid == 1) || (arr[mid] < arr[mid-1])) &&
-       ((mid == n) || (arr[mid] < arr[mid+1]))
-        return mid
-    elseif (mid > 1) && (arr[mid-1] < arr[mid])
-        return local_minimum_search(arr, low, mid-1, n)
-    else
-        return local_minimum_search(arr, mid+1, high, n)
-    end
-end
-
-function local_minimum(arr)
-  n = length(arr)
-  # Returns the index of the local minimum
-  return local_minimum_search(arr, 1, n, n)
-end
-```
-
 **Input**: An array \(A=⟨a_1,…,a_n⟩\).
 
 **Output**: An element \(a_i\) such that is meets the requirement of being *locally minimum*.
@@ -133,12 +113,20 @@ It should be noted that \(a_i = \min(a_{i-1}, a_i, a_{i+1})\) is equivalent to \
 
 **Divide and Conquer**: The algorithm works like a binary search. First it finds the middle index of the current slice of the array \(A\).
 
+\(low\)?
+\(high\)?
+
 \[mid = low + ⌊(high-low)/2⌋\]
 
-1) **Base Case**: ...
+1) **Base Case**:
+    a) If \(mid=1\)
+    b)
+    c)
+2) **Recursive Case**:
+    a) If \(a_{mid-1}<a_{mid}\)
+    b) If \(a_{mid+1}<a_{mid}\)
 
-2) **Recursive Case**: ...
-
+TODO: why does the algorithm work?
 
 ---
 
