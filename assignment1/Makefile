@@ -1,6 +1,7 @@
 BUILDDIR=build
 FILENAME=assignment1
 
+# TODO: create separate pdf files and one file that has all questions
 pdf:
 	mkdir $(BUILDDIR) -p
 	pandoc $(FILENAME).md \

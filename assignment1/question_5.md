@@ -7,7 +7,7 @@ Describe an algorithm that finds a local minimum in an array \(A\) in time \(O(\
 
 **Input**: An array \(A=⟨a_1,…,a_n⟩\).
 
-**Output**: An element \(a_i\) such that is meets the requirement of being *locally minimum*.
+**Output**: An index \(i\) such that element \(a_i\) meets the requirement of being *locally minimum*. Being locally minimum is defined as
 
 \[
 \begin{cases}
@@ -19,22 +19,21 @@ a_i = \min(a_{i-1}, a_i, a_{i+1}) & \text{otherwise}
 
 It should be noted that \(a_i = \min(a_{i-1}, a_i, a_{i+1})\) is equivalent to \((a_i ≤ a_{i-1}) ∧ (a_i ≤ a_{i+1})\).
 
-**Divide and Conquer**: The algorithm works like a binary search. First it finds the middle index of the current slice of the array \(A\).
+**Local Minimum Algorithm**:
 
-\(low\)?
-\(high\)?
+1) In the trivial case \(n=1\) local minimum \(i=1\).
+2) In the trivial case \(n=2\), if \(a_1≤a_2\) then \(i=1\), otherwise \(i=2\).
+3) Otherwise when \(n≥3\), we'll need to *divide and conquer*. The algorithm works like a binary search. First it finds the middle index \(mid\) from the current slice, from index \(low\) to \(high\), of the array \(A\). Initially the slice is \(low=1\) to \(high=n\). \[mid = low + ⌊(high-low)/2⌋\]
+    a) *Base Case*: If \(mid=1\) or \(mid=n\) or \((a_{mid} ≤ a_{mid-1}) ∧ (a_{mid} ≤ a_{mid+1})\) local minimum is at \(i=mid\).
+    b) *Recursive Case*: If the base case is not local minimum then we'll divide the search space and evaluate the recursive case with the new parameters.
+        a) If \(a_{mid-1} < a_{mid}\) then \(low:=low\) and \(high:=mid-1\).
+        b) If \(a_{mid+1} < a_{mid}\) then \(low:=mid+1\) and \(high:=high\).
 
-\[mid = low + ⌊(high-low)/2⌋\]
+The algorithm is quaranteed to find a local minimum because. Given array \(A\) where \(n≥3\) ...
 
-1) **Base Case**:
-    a) If \(mid=1\)
-    b)
-    c)
-2) **Recursive Case**:
-    a) If \(a_{mid-1} < a_{mid}\)
-    b) If \(a_{mid+1} < a_{mid}\)
+We care about the
 
-TODO: why does the algorithm work?
+we have \(2^3=8\) possible ways that the elements \(a_{mid-1}\) and \(a_{mid+1}\) are ordered around \(a_{mid}\), i.e. they can be either *less than* `<`, *equal* `=` or *greater than* `>` \(a_{mid}\).
 
 ---
 
