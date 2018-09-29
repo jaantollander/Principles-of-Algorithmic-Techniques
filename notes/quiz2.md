@@ -11,13 +11,13 @@
     - `false` cycle length in bipartite graph can only be even number
 
 6) Let \(G\) be a graph. Which of the following quantity may increase if an edge is added into graph \(G\)? More formally, what happens if we turn \(G=(V,E)\) into \(G'=(V,E∪\{e\})\).
-    - Degree of a vertex \(v\):
-    - The number of connected components of \(G\):
-    - The size of maximum clique in \(G\):
-    - The length of the shortest cycle in \(G\):
+    - Degree of a vertex \(v\): `true`
+    - The number of connected components of \(G\): `true`
+    - The size of maximum clique in \(G\): `true`
+    - The length of the shortest cycle in \(G\): `false`
 
 7) Let \(G\) be a graph. Which of the following quantity may increase if an edge is removed from graph \(G\)? More formally, what happens if we turn \(G=(V,E)\) into \(G'=(V,E-\{e\})\) where \(e\) is an edge in \(G\).
-    - The side of maximum independent set in \(G\):
-    - The diameter of \(G\):
-    - The maximum degree of \(G\):
-    - The chromatic number of \(G\):
+    - The size of maximum independent set in \(G\): `true`
+    - The diameter of \(G\): `true`
+    - The maximum degree of \(G\): `false`
+    - The chromatic number of \(G\): `false`
