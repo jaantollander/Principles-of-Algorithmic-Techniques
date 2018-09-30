@@ -1,4 +1,9 @@
-## Question 6
+---
+title: Question 6 - Fake Gold Coin Detection
+date: "2018-09-30"
+author: "Jaan Tollander de Balsch"
+header-includes: \usepackage{unicode-math}
+---
 There are \(n\) gold coins, one of which is a fake. All gold coins have the same weight, and the fake coin has different weight. You are allowed to use a balance whether two subsets of coins have equal weights. Describe a strategy that uses \(O(\log n)\) measurements of balance and find a fake coin.
 
 ---

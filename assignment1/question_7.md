@@ -1,4 +1,9 @@
-## Question 7
+---
+title: Question 7 - Kth Smallest Element Algorithm
+date: "2018-09-30"
+author: "Jaan Tollander de Balsch"
+header-includes: \usepackage{unicode-math}
+---
 Given two sorted arrays \(A[1…n]\) and \(B[1…n]\), describe an algorithm that find the \(k\)-th smallest element in \(A∪B\) in \(O(\log n)\) time.
 
 ---

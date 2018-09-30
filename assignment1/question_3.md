@@ -1,4 +1,9 @@
-## Question 3
+---
+title: Question 3 - Growth Bounds of Fibonacci Sequence
+date: "2018-09-30"
+author: "Jaan Tollander de Balsch"
+header-includes: \usepackage{unicode-math}
+---
 The Fibonacci numbers \(F_0, F_1, F_2, …\) are defined by the rule \[F_0=0, F_1=1, F_n=F_{n-1}+F_{n-2}, n≥2.\] In this problem we will confirm that this sequence grows exponentially fast and obtain some bounds on its growth.
 
 1) Use induction to prove that \(F_n≥2^{0.5n}\) for \(n≥6\).

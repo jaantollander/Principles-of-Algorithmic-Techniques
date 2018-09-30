@@ -1,4 +1,9 @@
-## Question 10
+---
+title: Question 10 - Stable Matching Problem
+date: "2018-09-30"
+author: "Jaan Tollander de Balsch"
+header-includes: \usepackage{unicode-math}
+---
 Let us revisit the stable matching problem. Let \(U\) be the set of universities and \(S\) be the set of students where \(|U|=|S|.\)
 
 Each student \(s\) has a preference relation \(≺_s\) where \(u≺_s u'\) is used to denote the fact that student \(s\) prefers to go to university \(u'\) to \(u\). Similarly for the preference relation \(≺_u\) for each university \(u.\)

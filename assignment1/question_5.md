@@ -1,4 +1,9 @@
-## Question 5
+---
+title: Question 5 - Local Minimum Algorithm
+date: "2018-09-30"
+author: "Jaan Tollander de Balsch"
+header-includes: \usepackage{unicode-math}
+---
 Given an array \(A[1…n]\), we say that entry \(A[i]\) is *locally minimum* if \[A[i]=\min(A[i-1],A[i],A[i+1]);\] for \(i=1\), it is locally minimum if \(A[i] < A[i+1]\) and for \(i=n\), when \(A[i] < A[i-1]\).
 
 Describe an algorithm that finds a local minimum in an array \(A\) in time \(O(\log n)\). Explain your algorithm either in clear English or a clear pseudocode.
@@ -29,7 +34,7 @@ It should be noted that \(a_i = \min(a_{i-1}, a_i, a_{i+1})\) is equivalent to \
         a) If \(a_{mid-1} < a_{mid}\) then \(low:=low\) and \(high:=mid-1\).
         b) If \(a_{mid+1} < a_{mid}\) then \(low:=mid+1\) and \(high:=high\).
 
-The algorithm is quaranteed to find a local minimum because. Given array \(A\) where \(n≥3\) ...
+The algorithm is guaranteed to find a local minimum because. Given array \(A\) where \(n≥3\) ...
 
 We care about the
 
