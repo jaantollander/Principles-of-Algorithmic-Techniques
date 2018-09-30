@@ -12,7 +12,7 @@
 
 6) Let \(G\) be a graph. Which of the following quantity may increase if an edge is added into graph \(G\)? More formally, what happens if we turn \(G=(V,E)\) into \(G'=(V,E∪\{e\})\).
     - Degree of a vertex \(v\): `true`
-    - The number of connected components of \(G\): `true`
+    - The number of connected components of \(G\): `false`
     - The size of maximum clique in \(G\): `true`
     - The length of the shortest cycle in \(G\): `false`
 
