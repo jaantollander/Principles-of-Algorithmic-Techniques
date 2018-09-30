@@ -27,3 +27,27 @@ F_{n+1}&=F_n+F_{n-1} \\
        &=2^{0.5⋅(n+1)}
 \end{aligned}
 \]
+
+---
+
+Lets assume that for some positive real numbers \(α\) and \(c\) and a real number \(n_0\): \[F_n≤c α^n \, \text{for all}\, n≥n_0.\]
+
+Using the Fibonacci recurrence relation we can now form new inequality \[cα^{n-1} + cα^{n-2} ≤ cα^n.\] Divided by \(cα^{n-2} > 0\) we obtain \[α+1≤α^2 \\ α^2-α-1≥0\]
+
+By solving the positive roots of the second order equation \[α≥\frac{1+\sqrt{5}}{2}.\]
+
+The base case \(F_1 = 1 ≤ cα^1\) is true for example by choosing \(c=1\) therefore the induction holds true.
+
+---
+
+Similar analysis can be done from below \(F_n≥cα^n\) which will obtain \[α≤\frac{1+\sqrt{5}}{2}.\]
+
+The base case \(F_1 = 1 ≥ cα^1\) is true for example by choosing \(c=1/3\) therefore the induction holds true.
+
+---
+
+These two case give the Fibonacci sequence tight bound \[F_n = Ω(φ^n)\] where \(φ=\frac{1+\sqrt{5}}{2}\) is the golden ratio.
+
+---
+
+https://math.stackexchange.com/questions/674533/prove-upper-bound-big-o-for-fibonaccis-sequence
