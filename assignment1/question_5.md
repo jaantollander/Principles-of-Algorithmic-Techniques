@@ -30,17 +30,14 @@ It should be noted that \(a_i = \min(a_{i-1}, a_i, a_{i+1})\) is equivalent to \
 
 1) In the trivial case \(n=1\) local minimum \(i=1\).
 2) In the trivial case \(n=2\), if \(a_1≤a_2\) then \(i=1\), otherwise \(i=2\).
-3) Otherwise when \(n≥3\), we'll need to *divide and conquer*. The algorithm works like a binary search. First it finds the middle index \(mid\) from the current slice, from index \(low\) to \(high\), of the array \(A\). Initially the slice is \(low=1\) to \(high=n\). \[mid = low + ⌊(high-low)/2⌋\]
-    a) *Base Case*: If \(mid=1\) or \(mid=n\) or \((a_{mid} ≤ a_{mid-1}) ∧ (a_{mid} ≤ a_{mid+1})\) local minimum is at \(i=mid\).
+3) Otherwise when \(n≥3\), the algorithm uses *divide and conquer* strategy. It works similarly to a binary search. First it finds the middle index \(mid\) from the current slice, from index \(low\) to \(high\), of the array \(A\). The initial slice is \[\begin{aligned} low &:= 1 \\ high &:= n \\ \end{aligned}. \] The middle index is calculated \[mid := low + ⌊(high-low)/2⌋\]
+    a) *Base Case*: If any of the following conditions is true a local mimimum will be at index \(i=mid\).
+        1) If \(mid=1\) the search has moved the first element and due to the *recursive case 1* the element must be a local mimimum (\(a_1 < a_2\)).
+        2) If \(mid=n\) the search has moved to the last element and due to the *recursive case 2* the element must be a local minimum (\(a_n < a_{n-1}\)).
+        3) If \((a_{mid} ≤ a_{mid-1}) ∧ (a_{mid} ≤ a_{mid+1})\) then the element is local mimimum by definition.
     b) *Recursive Case*: If the base case is not local minimum then we'll divide the search space and evaluate the recursive case with the new parameters.
-        a) If \(a_{mid-1} < a_{mid}\) then \(low:=low\) and \(high:=mid-1\).
-        b) If \(a_{mid+1} < a_{mid}\) then \(low:=mid+1\) and \(high:=high\).
-
-The algorithm is guaranteed to find a local minimum because. Given array \(A\) where \(n≥3\) ...
-
-We care about the
-
-we have \(2^3=8\) possible ways that the elements \(a_{mid-1}\) and \(a_{mid+1}\) are ordered around \(a_{mid}\), i.e. they can be either *less than* `<`, *equal* `=` or *greater than* `>` \(a_{mid}\).
+        1) If \(a_{mid-1} < a_{mid}\) then set new parater values and start again from calculating the middle index: \[\begin{aligned} low &:= low \\ high &:= mid-1 \\ \end{aligned}. \]
+        2) If \(a_{mid+1} < a_{mid}\) then set new parater values and start again from calculating the middle index: \[\begin{aligned} low &:= mid+1 \\ high &:= high \\ \end{aligned}. \]
 
 
 ## References
