@@ -12,6 +12,39 @@ Describe an algorithm that finds a local minimum in an array \(A\) in time \(O(\
 
 The local mimimum algorithm [@local_minimum_algorithm]
 
+```julia
+function local_minimum_search(arr, low, high, n)
+    mid = low + div(high - low, 2)
+    if (mid == 1) || (mid == n) ||
+        (arr[mid] <= arr[mid-1] && arr[mid] <= arr[mid+1])
+        return mid
+    elseif arr[mid-1] < arr[mid]
+        return local_minimum_search(arr, low, mid-1, n)
+    else
+        return local_minimum_search(arr, mid+1, high, n)
+    end
+end
+
+
+# Returns the index of the local minimum
+function local_minimum(arr)
+  n = length(arr)
+  if n == 1
+      return 1
+  elseif n == 2
+      if arr[1] <= arr[2]
+          return 1
+      else
+          return 2
+      end
+  else # n >= 3
+    return local_minimum_search(arr, 1, n, n)
+  end
+end
+```
+
+---
+
 **Input**: An array \(A=⟨a_1,…,a_n⟩\).
 
 **Output**: An index \(i\) such that element \(a_i\) meets the requirement of being *locally minimum*. Being locally minimum is defined as
