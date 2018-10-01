@@ -28,8 +28,8 @@ In order to find the *shortest path* from position \((1,1)\) to \((n,n)\) if suc
 v_{i,j}→v_{i+d,j}, \mathrm{if }\,1≤i+d≤n \\
 v_{i,j}→v_{i-d,j}, \mathrm{if }\,1≤i-d≤n \\
 v_{i,j}→v_{i,j+d}, \mathrm{if }\,1≤j+d≤n \\
-v_{i,j}→v_{i,j-d}, \mathrm{if }\,1≤j-d≤n.
-\end{aligned}
+v_{i,j}→v_{i,j-d}, \mathrm{if }\,1≤j-d≤n
+\end{aligned}.
 \]
 
 The shortest path problem for unweighted graphs translates into the problem of finding the least number of moves from start to end. This problem can be solved using *Breadth-first search*. The worst-case time complexity for breath-first search is \[O(|V|+|E|).\] For number maze, the number of vertices is \[|V|=n^2\] and number of edges is bounded by \[|E| < 4n^2.\] Therefore the sum is bouded by \[|V|+|E| < 5⋅n^2 \] and the time complexity of solving a number maze is \[O(n^2).\]

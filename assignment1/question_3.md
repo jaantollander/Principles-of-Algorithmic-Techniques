@@ -57,7 +57,7 @@ These two case give the Fibonacci sequence tight bound \[F_n = Ω(φ^n)\] where 
 
 The answer to questions 2 and 3:
 
-\[(2^c)^n=φ^n ⇒ c=\log φ\]
+\[(2^c)^n=φ^n ⇒ c=\log_2 φ\]
 
 ---
 

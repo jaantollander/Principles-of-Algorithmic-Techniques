@@ -27,7 +27,7 @@ j&=\min(n, h)
 \end{aligned}
 \]
 
-By choosing the indices this way the condition will \(i+j≤k\) hold which is important so that the \(k\)-th smallest element won't be excluded. The algorithm will also need to compare these two elements so that the correct half will be excluded.
+By choosing the indices this way, will assure that the condition \(i+j≤k\) holds which is important for the \(k\)-th smallest element not to be excluded. The algorithm will then compare these two elements so that the correct half will be excluded.
 
 a) If \(b_j < a_i\) then exclude elements \(⟨b_1,…,b_j⟩\) from the search. New inputs will be:
     1) \(A_2=A\)
@@ -40,7 +40,7 @@ b) If \(a_i ≤ b_j\) then exclude elements \(⟨a_1,…,a_i⟩\) from the searc
 
 **Base Case**:
 
-a) If either array is empty the \(k\)-th smallest element is the \(k\)-th element in the none empty array because the array is sorted.
+a) If either array is empty the \(k\)-th smallest element is the \(k\)-th element in the not empty array because the array is sorted.
 b) If \(k=1\) then the \(k\)-th smallest element is the minimum of elements \(a_1\) and \(b_1\) \[\min(a_1, b_1).\]
 
 
