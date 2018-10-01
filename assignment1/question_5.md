@@ -10,6 +10,8 @@ Describe an algorithm that finds a local minimum in an array \(A\) in time \(O(\
 
 ---
 
+The local mimimum algorithm [@local_minimum_algorithm]
+
 **Input**: An array \(A=⟨a_1,…,a_n⟩\).
 
 **Output**: An index \(i\) such that element \(a_i\) meets the requirement of being *locally minimum*. Being locally minimum is defined as
@@ -40,6 +42,5 @@ We care about the
 
 we have \(2^3=8\) possible ways that the elements \(a_{mid-1}\) and \(a_{mid+1}\) are ordered around \(a_{mid}\), i.e. they can be either *less than* `<`, *equal* `=` or *greater than* `>` \(a_{mid}\).
 
----
 
-- https://www.geeksforgeeks.org/find-local-minima-array/
+## References

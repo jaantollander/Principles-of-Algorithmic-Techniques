@@ -41,7 +41,7 @@ Using the Fibonacci recurrence relation we can now form new inequality \[cα^{n-
 
 By solving the positive roots of the second order equation \[α≥\frac{1+\sqrt{5}}{2}.\]
 
-The base case \(F_1 = 1 ≤ cα^1\) is true for example by choosing \(c=1\) therefore the induction holds true.
+The base case \(F_1 = 1 ≤ cα^1\) is true for example by choosing \(c=1\) therefore the induction holds true. [@fibonacci_upper_bound]
 
 ---
 
@@ -55,4 +55,10 @@ These two case give the Fibonacci sequence tight bound \[F_n = Ω(φ^n)\] where 
 
 ---
 
-https://math.stackexchange.com/questions/674533/prove-upper-bound-big-o-for-fibonaccis-sequence
+The answer to questions 2 and 3:
+
+\[(2^c)^n=φ^n ⇒ c=\log φ\]
+
+---
+
+## References

@@ -23,8 +23,7 @@ function local_minimum(arr)
       else
           return 2
       end
-  else
-    # n ≥ 3
+  else # n ≥ 3
     return local_minimum_search(arr, 1, n, n)
   end
 end
