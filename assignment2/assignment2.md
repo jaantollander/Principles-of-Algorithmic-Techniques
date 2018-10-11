@@ -9,8 +9,16 @@ You are given an undirected graph \(G=(V,E)\) where \(V\) is a list of cities an
 ### Part 1
 Describe an algorithm that given \(G,s,t\) and \(Q\), checks whether there is a feasible route from \(s\) to \(t\). Your algorithm should run in time \(O(V+E)\).
 
+---
+
+[Depth-first search (DPS)](https://en.wikipedia.org/wiki/Depth-first_search) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), does not change. [@introduction_to_algorithms pg. 603]
+
 ### Part 2
 Modify Dijkstra's algorithm to, given \(G,s,t\), compute a path from \(s\) to \(t\) that minimizes the length of the longest edge on that path.
+
+---
+
+
 
 
 ## Question 2: Negative Weights
@@ -91,3 +99,6 @@ You are given graph \(G=(V,E)\), weight function \(w\) on edges, together with a
 Describe a deterministic algorithm that, given an additional edge \(e\) (not in \(G\)) iwth cost \(w(e)\), find a minimum spanning tree \(T'\) for \(G'=(V,E∪\{e\})\) in \(O(|V|+|E|)\).
 
 Notice that your algorithm should not try to recompute MST from scratch but should instead use information about \(T\).
+
+
+## References
