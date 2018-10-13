@@ -18,6 +18,8 @@ Modify Dijkstra's algorithm to, given \(G,s,t\), compute a path from \(s\) to \(
 
 ---
 
+TODO: refer to Dijkstra appendix
+
 <!-- First the graph is pre-processed such that all the edges that have length over \(Q\) are removed, i.e. the new graph is \[G'=(V,E'),\] where \[E'=\{e∈E∣l(e)≤Q\}.\] This operation will take \(O(|E|)\) time. -->
 
 The weight function is defined as the distance \(l(e)\) if its below the cars capacity \(Q\) and otherwise it is infinite. Pratically, this achieves the same outcome as removing the edges that have distance over \(Q\) from the graph.
@@ -80,9 +82,38 @@ Shortest paths are not always unique: sometimes there are two or more different 
 
 **Input**: An undirected graph \(G=(V,E)\); edge lengths \(l_e>0\); vertex \(s∈V\).
 
-**Output**: A boolean array \(\operatorname{usp}[⋅]\) where, for each \(v∈V\) the value \(\operatorname{[V]}\) is true if and only if there is a unique shortest path from \(s\) to \(v\).
+**Output**: A boolean array \(usp[⋅]\) where, for each \(v∈V\) the value \(\operatorname{[V]}\) is true if and only if there is a unique shortest path from \(s\) to \(v\).
 
 Modify Dijkstra's algorithm to solve this problem.
+
+---
+
+TODO: refer to Dijkstra appendix
+
+The modified Dijkstra's algorithm will initialize the same way as normal Dijkstra's algorithm except we will also initilize the \(usp\) array to have all of its values \(TRUE\).
+
+<!-- \(\operatorname{Initialize-Single-Source}(G, s)\)
+
+1) **for** each \(v∈G.V\)
+2) ___ \(v.d = ∞\)
+3) ___ \(v.π = NIL\)
+4) ___ \(usp[v] = TRUE\)
+4) \(s.d=0\) -->
+
+The \(\operatorname{Relax}\) function is modified such that when a vertex \(u\) is relaxed and if it finds a new lowest upper bound \(v.d > u.d + w(u,v)\), it sets the the corresponding value in the array \(ups\) to \(TRUE\). Since it is the first time it encounters this lowest value, it must be *unique* shortest path.
+
+On the other hand, if we we encounter that new lowest upper bound \(v.d\) is equal to the sum of the upper bound of vertex \(u\) and weight of the edge \((u,v)\), \(u.d + w(u,v)\), it means that the algorithm has a possible found *non-unique* shortest path to the vertex \(v\).
+
+\(\operatorname{Relax'}(u,v,w)\)
+
+1) **if** \(v.d > u.d + w(u,v)\)
+2) ___ \(v.d = u.d + w(u,v)\)
+3) ___ \(v.π = u\)
+4) ___ \(usp[v] = TRUE\)
+5) **else if** \(v.d = u.d + w(u,v)\)
+6) ___ \(usp[v] = FALSE\)
+
+The running time of the Dijkstra's algorithm is \[O((|V|+|E|)\log |E|))\] as given in [@introduction_to_algorithms ch. 24.3]. The modifications made to the algorithm will not change this since the operations on array \(usp\) are simple constant time operations.
 
 
 ## Question 5: Lecture Hall Allocation
@@ -133,6 +164,54 @@ You are given graph \(G=(V,E)\), weight function \(w\) on edges, together with a
 Describe a deterministic algorithm that, given an additional edge \(e\) (not in \(G\)) iwth cost \(w(e)\), find a minimum spanning tree \(T'\) for \(G'=(V,E∪\{e\})\) in \(O(|V|+|E|)\).
 
 Notice that your algorithm should not try to recompute MST from scratch but should instead use information about \(T\).
+
+
+## Appendices
+### Dijkstra's Algorithm
+A good pseudocode about the implementation of the Dijkstra's algorithm and relatex analysis of its correctness and computational complexity is given by [@introduction_to_algorithms ch. 24, ch. 24.3].
+
+**Input**:
+
+- A graph \(G=(V,E)\)
+- Weigh function \(w:E→ℝ^{+}\)
+- Souce vertex \(s∈V\)
+
+**Output**: The shortest paths from the source vertest \(s\) to vertices \(v∈V\), which can be constructed by following the predesessors of each vertex after the algorithm has executed.
+
+**Implementation details**:
+
+- \(v.d\) denotes the upper bound on the weight of a shortest path from \(s\) to \(v\) (i.e, a shortest path estimate).
+- \(v.π\) denotes the predesessor node.
+- \(Q\) denotes a min-priority queue that is queried by the value \(v.d\).
+
+**The pseudocode**:
+
+\(\operatorname{Initialize-Single-Source}(G, s)\)
+
+1) **for** each \(v∈G.V\)
+2) ___ \(v.d = ∞\)
+3) ___ \(v.π = NIL\)
+4) \(s.d=0\)
+
+\(\operatorname{Relax}(u,v,w)\)
+
+1) **if** \(v.d > u.d + w(u,v)\)
+2) ___ \(v.d = u.d + w(u,v)\)
+3) ___ \(v.π = u\)
+
+\(\operatorname{Dijkstra}(G,w,s)\)
+
+1) \(\operatorname{Initialize-Single-Source}(G, s)\)
+2) \(S=∅\)
+3) \(Q=G.V\)
+4) **while** \(Q≠∅\)
+5) ___ \(u = \operatorname{Extract-Min}(Q)\)
+6) ___ \(S=S∪\{u\}\)
+7) ___ **for** each vertex \(v∈G.Adj[u]\)
+8) ___ ___ \(\operatorname{Relax}(u,v,w)\)
+
+
+TODO: running time
 
 
 ## References
