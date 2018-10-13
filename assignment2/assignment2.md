@@ -28,25 +28,43 @@ w(e) = \begin{cases} l(e) & l(e) < Q \\ ∞ & l(e) ≥ Q\end{cases}
 
 The modified Dijkstra's algorithm will *minimize the longest edge* in the path from \(s\) to \(t\) instead of minimizing the total length of the path. The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms ch.24.3]. In order to minimize the longest edge, will need to modify the \(\operatorname{Relax}(u,v,w)\) function into:
 
-\(\operatorname{Relax}'(u,v,w)\)
+\(\operatorname{Relax'}(u,v,w)\)
 
 1) **if** \(v.d > \max(u.d, w(u,v))\)
-2)   \(v.d = \max(u.d, w(u,v))\)
-3)   \(v.π = u\)
+2) ___ \(v.d = \max(u.d, w(u,v))\)
+3) ___ \(v.π = u\)
 
 This modification, instead of updating the of upper bound \(v.d\) with total weight of the path, will update it with the maximum of the previous upper bound \(u.d\) and the weight of the edge \(e=\{u,v\}\) if the maximum is smaller than the upper bound \(v.d\).
 
 
 ## Question 2: Negative Weights
-In this problem, assume that you are given an access to a sub-routine \(\operatorname{Dijkstra}(V',E',w',s')\) which returns an array \(D\) such that, for each vertex \(v∈V'\), the length of a shortest path from \(s'\) to \(v\) is equal to \(D[v]\).
+In this problem, assume that you are given an access to a sub-routine \(\operatorname{Dijkstra'}(V',E',w',s')\) which returns an array \(D\) such that, for each vertex \(v∈V'\), the length of a shortest path from \(s'\) to \(v\) is equal to \(D[v]\).
 
 Assume that the running time of this sub-routine is always at most \(T(n,m)\) on \(n\)-vertex \(m\)-edge graph.
+
 
 ### Part 1
 You are given an input directed graph \(G=(V,E)\), source \(s∈V\), and a weight function \(w\) for which there is exactly one edge \(e∈E\) with a negative weight. Assume that there is no negative cycle. Describe an algorithm that computes shortest paths from \(s\) to each vertex in \(V\) in time \(O(T(|V|,|E|))\).
 
 ### Part 2
-You are given an input directed graph \(G=(V,E)\), source \(s∈V\), and a weight function \(w\) for which there are exactly \(k\) edges \(e∈E\) with negative weight. Assume that there is no negative cycle. Describe an algorithm that computes shortest paths from \(s\) to each vertex in \(V\) in time \(O(k+1)!(T(|V|,|E|))\).
+You are given an input directed graph \(G=(V,E)\), source \(s∈V\), and a weight function \(w\) for which there are exactly \(k\) edges \(e∈E\) with negative weight. Assume that there is no negative cycle. Describe an algorithm that computes shortest paths from \(s\) to each vertex in \(V\) in time \(O((k+1)! T(|V|,|E|))\).
+
+
+---
+
+The algorithm computes the distance array \(D\) and then determines which edges \((u,v)∈E\) belong to the shortest path tree by checking if the distance to \(u\) added with the weight of the edge \((u,v)\) equals the distance to \(v\).
+
+**Input**: A graph \(G\), weight function \(w:E→ℝ\), source vertex \(s\) and subroutine \(\operatorname{Dijkstra'}\).
+
+**Output**: A graph \(G=(V,E')\) that consist of vertices \(V\) and edges \(E'\), where by following the edges all the shortest from \(s\) to each vertex \(v∈V\) can be reconstructed.
+
+1) \(D = \operatorname{Dijkstra'}(G.V,G.E,w,s)\)
+2) \(E' = ∅\)
+2) **for** each edge \((u,v) ∈ E\)
+3) ___ **if** \(D[u] + w(u,v) = D[v]\)
+4) ___ ___ \(E' = E' ∪ \{(u,v)\}\)
+
+The algorithm runs in time \[O(T(|V|,|E|)) + O(|E|).\]
 
 
 ## Question 3: Multiple Selection
@@ -87,7 +105,7 @@ You are given a collection of \(n\) rectangles (represented by the coordinates o
 Design an algorithm efficiently finds the maximum subset of rectangles that do not overlap. More formally, each rectangle is represented by the point set \([a,b]×[c,d]\), and two rectangles overlap if and only if their interiors have non-empty intersection.
 
 
-## Question 7: Smooth Non-decrasing Subsequence
+## Question 7: Smooth Non-decreasing Subsequence
 For a sequence of non-negative real numbers \(a_1,a_2,…,a_n\), we say that a subsequence \(a_1,a_2,…,a_{i_k}\) where \(i_1 < i_2 < … < i_k\) is non-decresing subsequence of length if \(a_{i_j}≤a_{i_{j+1}}\) for all \(1≤j < k\). Further, we say that such a subsequence is \(B\)-smooth if we have \(a_{i_{j+1}}-a_{i_j}≤B\) for all \(1≤j< k\).
 
 Describe a dynamic programming algorithm that takes as input the sequence \(a_1,…,a_n\) together with integer \(B\) and produces the longest \(B\)-smooth non-decreasing subsequence (i.e. find the one with maximum \(k\)). To receive full credits, clearly, define the DP table as well as the recurrence. Briefly analyze the running time of your algorithm.
