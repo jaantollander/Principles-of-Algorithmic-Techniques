@@ -18,17 +18,15 @@ Modify Dijkstra's algorithm to, given \(G,s,t\), compute a path from \(s\) to \(
 
 ---
 
-TODO: refer to Dijkstra appendix
-
-<!-- First the graph is pre-processed such that all the edges that have length over \(Q\) are removed, i.e. the new graph is \[G'=(V,E'),\] where \[E'=\{e∈E∣l(e)≤Q\}.\] This operation will take \(O(|E|)\) time. -->
-
 The weight function is defined as the distance \(l(e)\) if its below the cars capacity \(Q\) and otherwise it is infinite. Pratically, this achieves the same outcome as removing the edges that have distance over \(Q\) from the graph.
 
 \begin{equation}
 w(e) = \begin{cases} l(e) & l(e) < Q \\ ∞ & l(e) ≥ Q\end{cases}
 \end{equation}
 
-The modified Dijkstra's algorithm will *minimize the longest edge* in the path from \(s\) to \(t\) instead of minimizing the total length of the path. The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms ch.24.3]. In order to minimize the longest edge, will need to modify the \(\operatorname{Relax}(u,v,w)\) function into:
+The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms ch.24.3]. I have written this algorithm down in the appendix [*Dijkstra's Algorithm*](#dijkstra's-algorithm).
+
+The modified Dijkstra's algorithm will *minimize the longest edge* in the path from \(s\) to \(t\) instead of minimizing the total length of the path. In order to minimize the longest edge, will need to modify the \(\operatorname{Relax}(u,v,w)\) function into:
 
 \(\operatorname{Relax'}(u,v,w)\)
 
@@ -56,7 +54,7 @@ You are given an input directed graph \(G=(V,E)\), source \(s∈V\), and a weigh
 
 The algorithm computes the distance array \(D\) and then determines which edges \((u,v)∈E\) belong to the shortest path tree by checking if the distance to \(u\) added with the weight of the edge \((u,v)\) equals the distance to \(v\).
 
-**Input**: A graph \(G\), weight function \(w:E→ℝ\), source vertex \(s\) and subroutine \(\operatorname{Dijkstra'}\).
+**Input**: A graph \(G\), weight function \(w:E→ℝ\) and source vertex \(s∈V\).
 
 **Output**: A graph \(G=(V,E')\) that consist of vertices \(V\) and edges \(E'\), where by following the edges all the shortest from \(s\) to each vertex \(v∈V\) can be reconstructed.
 
@@ -67,6 +65,8 @@ The algorithm computes the distance array \(D\) and then determines which edges 
 4) ___ ___ \(E' = E' ∪ \{(u,v)\}\)
 
 The algorithm runs in time \[O(T(|V|,|E|)) + O(|E|).\]
+
+TODO: why?
 
 
 ## Question 3: Multiple Selection
@@ -88,17 +88,9 @@ Modify Dijkstra's algorithm to solve this problem.
 
 ---
 
-TODO: refer to Dijkstra appendix
+The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms ch.24.3]. I have written this algorithm down in the appendix [*Dijkstra's Algorithm*](#dijkstra's-algorithm).
 
-The modified Dijkstra's algorithm will initialize the same way as normal Dijkstra's algorithm except we will also initilize the \(usp\) array to have all of its values \(TRUE\).
-
-<!-- \(\operatorname{Initialize-Single-Source}(G, s)\)
-
-1) **for** each \(v∈G.V\)
-2) ___ \(v.d = ∞\)
-3) ___ \(v.π = NIL\)
-4) ___ \(usp[v] = TRUE\)
-4) \(s.d=0\) -->
+The values the \(usp\) array should be initialized to \(TRUE\).
 
 The \(\operatorname{Relax}\) function is modified such that when a vertex \(u\) is relaxed and if it finds a new lowest upper bound \(v.d > u.d + w(u,v)\), it sets the the corresponding value in the array \(ups\) to \(TRUE\). Since it is the first time it encounters this lowest value, it must be *unique* shortest path.
 
