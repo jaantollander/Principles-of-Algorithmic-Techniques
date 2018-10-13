@@ -11,14 +11,30 @@ Describe an algorithm that given \(G,s,t\) and \(Q\), checks whether there is a 
 
 ---
 
-[Depth-first search (DPS)](https://en.wikipedia.org/wiki/Depth-first_search) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), does not change. [@introduction_to_algorithms pg. 603]
+[Depth-first search (DPS)](https://en.wikipedia.org/wiki/Depth-first_search) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), does not change. [@introduction_to_algorithms ch. 22.3]
 
 ### Part 2
 Modify Dijkstra's algorithm to, given \(G,s,t\), compute a path from \(s\) to \(t\) that minimizes the length of the longest edge on that path.
 
 ---
 
+<!-- First the graph is pre-processed such that all the edges that have length over \(Q\) are removed, i.e. the new graph is \[G'=(V,E'),\] where \[E'=\{e∈E∣l(e)≤Q\}.\] This operation will take \(O(|E|)\) time. -->
 
+The weight function is defined as the distance \(l(e)\) if its below the cars capacity \(Q\) and otherwise it is infinite. Pratically, this achieves the same outcome as removing the edges that have distance over \(Q\) from the graph.
+
+\begin{equation}
+w(e) = \begin{cases} l(e) & l(e) < Q \\ ∞ & l(e) ≥ Q\end{cases}
+\end{equation}
+
+The modified Dijkstra's algorithm will *minimize the longest edge* in the path from \(s\) to \(t\) instead of minimizing the total length of the path. The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms ch.24.3]. In order to minimize the longest edge, will need to modify the \(\operatorname{Relax}(u,v,w)\) function into:
+
+\(\operatorname{Relax}'(u,v,w)\)
+
+1) **if** \(v.d > \max(u.d, w(u,v))\)
+2)   \(v.d = \max(u.d, w(u,v))\)
+3)   \(v.π = u\)
+
+This modification, instead of updating the of upper bound \(v.d\) with total weight of the path, will update it with the maximum of the previous upper bound \(u.d\) and the weight of the edge \(e=\{u,v\}\) if the maximum is smaller than the upper bound \(v.d\).
 
 
 ## Question 2: Negative Weights
