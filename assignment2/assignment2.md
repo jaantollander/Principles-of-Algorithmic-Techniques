@@ -162,12 +162,11 @@ Here we'll use a slightly more clear representation of the algorithm's pseudocod
 
 There are two conditions that are required for \(\operatorname{Ameet-MST}\) algorithm to be correct.
 
-1) The resulting graph \(G'=(V,T)\) is a spanning tree.
-2) Total weight of the result \(w(T)\) is minimized.
+**The resulting graph \(G'=(V,T)\) is a spanning tree, i.e, the graph is connected and has no cycles**: The input graph \(G\) is a connected graph by definition and the algorithm only removes edges if the result is connected graph, therefore final graph \(G'\) must also be connected. Futhermore, since we loop over all of the edges in the graph there will be only one edge left between each two vertices, i.e, the algorithm removes all cycles.
 
-The resulting graph \(G'\) is a spanning tree. Initially \(T\) equal to all edges \(E\)
+**Lemma**: Given a cycle \(v_1 → v_2 → … → v_n → v_1\) of edges \(v_i\) in a weighted, undirected graph, removing the edge \(v_i\) with the highest weight from the cycle, will result a path where all vertices are still reachable from any other vertex and the the total weight of the cycle is minimized.
 
-TODO: **Lemma**: cycles, by removing the edge with the highest weight from the cycle all vertices are still reachable and the total weight is minimized.
+**The total weight of the result \(w(T)\) is minimized**: By using Lemma (???) 
 
 I would bet that the algorithm works (slowly). Ameets algorithm can be regarded as a crude brute force solution to the MST problem.
 
