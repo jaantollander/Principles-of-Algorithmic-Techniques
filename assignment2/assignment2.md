@@ -166,9 +166,9 @@ There are two conditions that are required for \(\operatorname{Ameet-MST}\) algo
 
 **Lemma**: Given a cycle \(v_1 → v_2 → … → v_n → v_1\) of edges \(v_i\) in a weighted, undirected graph, removing the edge \(v_i\) with the highest weight from the cycle, will result a path where all vertices are still reachable from any other vertex and the the total weight of the cycle is minimized.
 
-**The total weight of the result \(w(T)\) is minimized**: By using Lemma (???) 
+**The total weight of the result \(w(T)\) is minimized**: Since the algorithm is only removing edges \(e\) when the resulting graph remains connected, i.e, the edge \(e\) is a part of a cycle, and the edges \(E\) were sorted in non-increasing (decresing) order, i.e., the edges \(e\) are looped from largest to smallest by their weight, due to lemma (???) removing the edge \(e\) from the graph \(G\) will minimize the total weight of the resulting spanning tree \(G'\).
 
-I would bet that the algorithm works (slowly). Ameets algorithm can be regarded as a crude brute force solution to the MST problem.
+I bet that the algorithm works (but slowly). Ameets algorithm can be regarded as a crude brute force solution to the MST problem.
 
 
 ## Question 9: Application of Data Structures
