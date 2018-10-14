@@ -11,7 +11,7 @@ Describe an algorithm that given \(G,s,t\) and \(Q\), checks whether there is a 
 
 ---
 
-[Depth-first search (DPS)](https://en.wikipedia.org/wiki/Depth-first_search) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), does not change. [@introduction_to_algorithms ch. 22.3]
+Depth-first search (DPS) or Breadth-first search (BFS) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), will not change. [@introduction_to_algorithms ch. 22.3]
 
 ### Part 2
 Modify Dijkstra's algorithm to, given \(G,s,t\), compute a path from \(s\) to \(t\) that minimizes the length of the longest edge on that path.
@@ -65,6 +65,8 @@ The algorithm computes the distance array \(D\) and then determines which edges 
 4) ___ ___ \(E' = E' ∪ \{(u,v)\}\)
 
 The algorithm runs in time \[O(T(|V|,|E|)) + O(|E|).\]
+
+TODO: \(O(T(|V|,|E|))\) can't be faster than linear time.
 
 TODO: why?
 
@@ -141,9 +143,33 @@ Ameet proposed the following algorithm and claimed that the algorithm solves Min
 
 1) Sort the edges into a non-increasing order of edge weights \(w\)
 2) \(T=E\)
-3) For each edge \(e∈E\), taken in non-increasing order of weights
-    4) if \(T-e\) is a connected graph, then remove \(e\) form \(T\)
+3) **for** each edge \(e∈E\), taken in non-increasing order of weights
+4) ___ **if** \(T-e\) is a connected graph, then remove \(e\) from \(T\)
 
+---
+
+The minimum spanning tree (MST) problem is defined as: Given a connected graph \(G=(V,E)\) and weight function \(w:E→ℝ\), find an acyclic subset \(T⊆E\) that connect all of the vertices and whose total weight \(w(T)=\sum_{(u,v∈T)} w(u,v)\) is minimized. [@introduction_to_algorithms ch.23]
+
+Here we'll use a slightly more clear representation of the algorithm's pseudocode.
+
+\(\operatorname{Ameet-MST}(G,w)\)
+
+1) \(E' = \operatorname{Sort-Non-Increasing}(E, w)\)
+2) \(T=E\)
+3) **for** each edge \(e∈E'\)
+4) ___ **if** \(T-\{e\}\) is a connected graph
+5) ___ ___ \(T = T∩\{e\}\)
+
+There are two conditions that are required for \(\operatorname{Ameet-MST}\) algorithm to be correct.
+
+1) The resulting graph \(G'=(V,T)\) is a spanning tree.
+2) Total weight of the result \(w(T)\) is minimized.
+
+The resulting graph \(G'\) is a spanning tree. Initially \(T\) equal to all edges \(E\)
+
+TODO: **Lemma**: cycles, by removing the edge with the highest weight from the cycle all vertices are still reachable and the total weight is minimized.
+
+I would bet that the algorithm works (slowly). Ameets algorithm can be regarded as a crude brute force solution to the MST problem.
 
 
 ## Question 9: Application of Data Structures
@@ -153,9 +179,13 @@ Given \(k\) sorted arrays \(A_1,A_2,…,A_k\) as input, devise an algorithm that
 ## Question 10: Minimum Spanning Trees with Updates
 You are given graph \(G=(V,E)\), weight function \(w\) on edges, together with a subtree \(T\) of \(G\) that is guaranteed to be a minimum spanning tree.
 
-Describe a deterministic algorithm that, given an additional edge \(e\) (not in \(G\)) iwth cost \(w(e)\), find a minimum spanning tree \(T'\) for \(G'=(V,E∪\{e\})\) in \(O(|V|+|E|)\).
+Describe a deterministic algorithm that, given an additional edge \(e\) (not in \(G\)) with cost \(w(e)\), find a minimum spanning tree \(T'\) for \(G'=(V,E∪\{e\})\) in \(O(|V|+|E|)\).
 
 Notice that your algorithm should not try to recompute MST from scratch but should instead use information about \(T\).
+
+---
+
+TODO: adding an edge \(e=(u,v)\) creates a cycle, find the path from \(u\) to \(v\) that does not go through \(e\), find the edge with highest weight in this path and remove it.
 
 
 ## Appendices
