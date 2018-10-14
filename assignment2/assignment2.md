@@ -164,11 +164,11 @@ There are two conditions that are required for \(\operatorname{Ameet-MST}\) algo
 
 **The resulting graph \(G'=(V,T)\) is a spanning tree, i.e, the graph is connected and has no cycles**: The input graph \(G\) is a connected graph by definition and the algorithm only removes edges if the result is connected graph, therefore final graph \(G'\) must also be connected. Futhermore, since we loop over all of the edges in the graph there will be only one edge left between each two vertices, i.e, the algorithm removes all cycles.
 
-**Lemma**: Given a cycle \(v_1 → v_2 → … → v_n → v_1\) of edges \(v_i\) in a weighted, undirected graph, removing the edge \(v_i\) with the highest weight from the cycle, will result a path where all vertices are still reachable from any other vertex and the the total weight of the cycle is minimized.
+**Lemma 1**. *Given a cycle \(v_1 → v_2 → … → v_n → v_1\) of edges \(v_i\) in a weighted, undirected graph, removing the edge \(v_i\) with the highest weight from the cycle, will result a path where all vertices are still reachable from any other vertex and the the total weight of the cycle is minimized.* \(\label{lemma_1}\tag{Lemma 1}\)
 
-**The total weight of the result \(w(T)\) is minimized**: Since the algorithm is only removing edges \(e\) when the resulting graph remains connected, i.e, the edge \(e\) is a part of a cycle, and the edges \(E\) were sorted in non-increasing (decresing) order, i.e., the edges \(e\) are looped from largest to smallest by their weight, due to lemma (???) removing the edge \(e\) from the graph \(G\) will minimize the total weight of the resulting spanning tree \(G'\).
+**The total weight of the result \(w(T)\) is minimized**: Since the algorithm is only removing edges \(e\) when the resulting graph remains connected, i.e, the edge \(e\) is a part of a cycle, and the edges \(E\) were sorted in non-increasing (decresing) order, i.e., the edges \(e\) are looped from largest to smallest by their weight, due to \(\ref{lemma_1}\) removing the edge \(e\) from the graph \(G\) will minimize the total weight of the resulting spanning tree \(G'\).
 
-I bet that the algorithm works (but slowly). Ameets algorithm can be regarded as a crude brute force solution to the MST problem.
+I'll bet that the algorithm works (but slowly). Ameets algorithm can be regarded as a crude brute force solution to the MST problem.
 
 
 ## Question 9: Application of Data Structures
@@ -184,7 +184,9 @@ Notice that your algorithm should not try to recompute MST from scratch but shou
 
 ---
 
-TODO: adding an edge \(e=(u,v)\) creates a cycle, find the path from \(u\) to \(v\) that does not go through \(e\), find the edge with highest weight in this path and remove it.
+- TODO: adding an edge \(e=(u,v)\) creates a cycle, find the path from \(u\) to \(v\) that does not go through \(e\), find the edge with highest weight in this path and remove it.
+- TODO: refer to lemma_1
+- TODO: pseudocode
 
 
 ## Appendices
