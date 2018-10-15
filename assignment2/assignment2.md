@@ -11,7 +11,7 @@ Describe an algorithm that given \(G,s,t\) and \(Q\), checks whether there is a 
 
 ---
 
-Breadth-first search (BFS) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), will not change. [@introduction_to_algorithms ch. 22.3]
+Breadth-first search (BFS) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), will not change. [@introduction_to_algorithms, ch. 22.3]
 
 ### Part 2
 Modify Dijkstra's algorithm to, given \(G,s,t\), compute a path from \(s\) to \(t\) that minimizes the length of the longest edge on that path.
@@ -24,7 +24,7 @@ The weight function is defined as the distance \(l(e)\) if its below the cars ca
 w(e) = \begin{cases} l(e) & l(e) < Q \\ ∞ & l(e) ≥ Q\end{cases}
 \end{equation}
 
-The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms ch.24.3]. I have written this algorithm down in the appendix [*Dijkstra's Algorithm*](#dijkstra's-algorithm).
+The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms, ch.24.3]. I have written this algorithm down in the appendix [*Dijkstra's Algorithm*](#dijkstra's-algorithm).
 
 The modified Dijkstra's algorithm will *minimize the longest edge* in the path from \(s\) to \(t\) instead of minimizing the total length of the path. In order to minimize the longest edge, will need to modify the \(\operatorname{Relax}(u,v,w)\) function into:
 
@@ -90,7 +90,7 @@ Modify Dijkstra's algorithm to solve this problem.
 
 ---
 
-The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms ch.24.3]. I have written this algorithm down in the appendix [*Dijkstra's Algorithm*](#dijkstra's-algorithm).
+The pseudocode for Dijkstra's algorithm is given by [@introduction_to_algorithms, ch.24.3]. I have written this algorithm down in the appendix [*Dijkstra's Algorithm*](#dijkstra's-algorithm).
 
 The values the \(usp\) array should be initialized to \(TRUE\).
 
@@ -107,7 +107,7 @@ On the other hand, if we we encounter that new lowest upper bound \(v.d\) is equ
 5) **else if** \(v.d = u.d + w(u,v)\)
 6) ___ \(usp[v] = FALSE\)
 
-The running time of the Dijkstra's algorithm is \[O((|V|+|E|)\log |E|))\] as given in [@introduction_to_algorithms ch. 24.3]. The modifications made to the algorithm will not change this since the operations on array \(usp\) are simple constant time operations.
+The running time of the Dijkstra's algorithm is \[O((|V|+|E|)\log |E|))\] as given in [@introduction_to_algorithms, ch. 24.3]. The modifications made to the algorithm will not change this since the operations on array \(usp\) are simple constant time operations.
 
 
 ## Question 5: Lecture Hall Allocation
@@ -148,7 +148,7 @@ Ameet proposed the following algorithm and claimed that the algorithm solves Min
 
 ---
 
-The minimum spanning tree (MST) problem is defined as: Given a connected graph \(G=(V,E)\) and weight function \(w:E→ℝ\), find an acyclic subset \(T⊆E\) that connect all of the vertices and whose total weight \(w(T)=\sum_{(u,v∈T)} w(u,v)\) is minimized. [@introduction_to_algorithms ch.23]
+The minimum spanning tree (MST) problem is defined as: Given a connected graph \(G=(V,E)\) and weight function \(w:E→ℝ\), find an acyclic subset \(T⊆E\) that connect all of the vertices and whose total weight \(w(T)=\sum_{(u,v∈T)} w(u,v)\) is minimized. [@introduction_to_algorithms, ch.23]
 
 Here we'll use a slightly more clear representation of the algorithm's pseudocode.
 
@@ -175,6 +175,53 @@ I'll bet that the algorithm works (but slowly). Ameets algorithm can be regarded
 
 ## Question 9: Application of Data Structures
 Given \(k\) sorted arrays \(A_1,A_2,…,A_k\) as input, devise an algorithm that merges arrays into one sorted array \(A\) that combines elements from all such \(A_i\). You algorithm should run in time \(O(n\log(k+1))\) where \(n\) is the total number of elements in the combined array \(A\).
+
+---
+
+During mergesort -- a divide-and-conquer approach for solving the sorting problem -- a subproblem that arrises is the sorting of sorted arrays. A slight modification to the algorithm can solve the sorting of sorted arrays in \(O(n\log(k+1))\) compared to the mergesort that run in \(O(n \log n)\) for an array with \(n\) elements. The following pseudocode algorithm is adapted from [@algorithms_book, ch. 2.3].
+
+**Input**: Two sorted arrays \(X\) and \(Y\).
+
+**Output**: Sorted array \(Z\) that contains all the elements in arrays \(X\) and \(Y\).
+
+\(\operatorname{Merge}(X, Y)\)
+
+1) **if** \(|X| = 0\)
+2) ___ **return** \(Y\)
+3) **if** \(|Y| = 0\)
+4) ___ **return** \(X\)
+5) **if** \(X[1] < Y[1]\)
+6) ___ **return** \(X[1] ∘ \operatorname{Merge}(X-X[1], Y)\)
+7) **else**
+8) ___ **return** \(Y[1] ∘ \operatorname{Merge}(X, Y-Y[1])\)
+
+Where \(∘\) denotes concatenation. Runtime of this algorithm is linear \(O(|X| + |Y|)\) because in each recursion the algorithm removes one element from either array.
+
+**Input**: An array of \(k\) sorted arrays \(⟨A_1, A_2, …,A_k⟩\).
+
+**Output**: Sorted array \(A\) that combines elements from all arrays \(A_i\).
+
+\(\operatorname{Merge-Sort-Arrays}(⟨A_1, A_2, …,A_k⟩)\)
+
+1) **if** \(k>1\)
+2) ___ \(B' = \operatorname{Merge-Sort-Arrays}(⟨A_1, A_2, …,A_{⌊n/2⌋}⟩))\)
+3) ___ \(B'' = \operatorname{Merge-Sort-Arrays}(⟨A_{⌊n/2⌋+1}, A_2, …,A_k⟩))\)
+4) ___ **return** \(\operatorname{Merge}(B',B'')\)
+5) **else**
+6) ___ **return** \(⁠A_1\)
+
+TODO: clean up the explanation
+
+Figure 2.3 in [@algorithms_book, ch. 2.2, pg. 59] visualizes recurrence relations in divide-and-conquer algorithm. The depth of the recurrence relation in \(\operatorname{Merge-Sort-Arrays}\) is \(\log_2 k\). The total computational complexity of the all the \(\operatorname{Merge}\) operations in each level has complexity \(O(n)\).
+
+1) \(O(n_1+n_2) + … O(n_{k-1}+n_k)∈O(n)\)
+2) \(O((n_1+n_2)+(n_3+n_4)) + … O((n_{k-3}+n_{k-2}) + (n_{k-1}+n_k))∈O(n)\)
+3) And so on upto
+
+* \(\sum_{n=1}^k n_i = n\)
+
+Therefore the computational complexity of the algorithm is \[O(n \log k).\]
+
 
 
 ## Question 10: Minimum Spanning Trees with Updates
@@ -215,7 +262,7 @@ In lines 3-7 the algorithm compares the weight of the edge \(e'\) with the highe
 
 ## Appendices
 ### Dijkstra's Algorithm
-A good pseudocode about the implementation of the Dijkstra's algorithm and relatex analysis of its correctness and computational complexity is given by [@introduction_to_algorithms ch. 24, ch. 24.3].
+A good pseudocode about the implementation of the Dijkstra's algorithm and relatex analysis of its correctness and computational complexity is given by [@introduction_to_algorithms, ch. 24, ch. 24.3].
 
 **Input**:
 

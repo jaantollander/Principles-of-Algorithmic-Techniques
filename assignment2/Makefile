@@ -13,6 +13,7 @@ pdf:
 	--filter pandoc-citeproc \
 	--bibliography=bibliography.bib \
 	--csl=https://raw.githubusercontent.com/citation-style-language/styles/master/harvard-anglia-ruskin-university.csl \
+	--toc \
 
 # --csl=https://www.zotero.org/styles/frontiers-in-applied-mathematics-and-statistics \
 
