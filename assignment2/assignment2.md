@@ -11,7 +11,7 @@ Describe an algorithm that given \(G,s,t\) and \(Q\), checks whether there is a 
 
 ---
 
-Depth-first search (DPS) or Breadth-first search (BFS) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), will not change. [@introduction_to_algorithms ch. 22.3]
+Breadth-first search (BFS) can be modified to perform a search to find a feasible route. Instead of traversing all the edges, we only traverse those that satisfy the condition \[l(e)≤Q.\] Assuming that this is a constant time operation, the worst case performance, \(O(|E|+|V|)\), will not change. [@introduction_to_algorithms ch. 22.3]
 
 ### Part 2
 Modify Dijkstra's algorithm to, given \(G,s,t\), compute a path from \(s\) to \(t\) that minimizes the length of the longest edge on that path.
@@ -164,7 +164,9 @@ There are two conditions that are required for \(\operatorname{Ameet-MST}\) algo
 
 **The resulting graph \(G'=(V,T)\) is a spanning tree, i.e, the graph is connected and has no cycles**: The input graph \(G\) is a connected graph by definition and the algorithm only removes edges if the result is connected graph, therefore final graph \(G'\) must also be connected. Futhermore, since we loop over all of the edges in the graph there will be only one edge left between each two vertices, i.e, the algorithm removes all cycles.
 
-**Lemma 1**. *Given a cycle \(v_1 → v_2 → … → v_n → v_1\) of edges \(v_i\) in a weighted, undirected graph, removing the edge \(v_i\) with the highest weight from the cycle, will result a path where all vertices are still reachable from any other vertex and the the total weight of the cycle is minimized.* \(\label{lemma_1}\tag{Lemma 1}\)
+\[\label{lemma_1}\tag{Lemma 1}\]
+
+**Lemma 1**. *Given a cycle \(v_1 → v_2 → … → v_n → v_1\) of edges \(v_i\) in a weighted, undirected graph, removing the edge \(v_i\) with the highest weight from the cycle, will result a path where all vertices are still reachable from any other vertex and the the total weight of the cycle is minimized.*
 
 **The total weight of the result \(w(T)\) is minimized**: Since the algorithm is only removing edges \(e\) when the resulting graph remains connected, i.e, the edge \(e\) is a part of a cycle, and the edges \(E\) were sorted in non-increasing (decresing) order, i.e., the edges \(e\) are looped from largest to smallest by their weight, due to \(\ref{lemma_1}\) removing the edge \(e\) from the graph \(G\) will minimize the total weight of the resulting spanning tree \(G'\).
 
@@ -184,9 +186,31 @@ Notice that your algorithm should not try to recompute MST from scratch but shou
 
 ---
 
-- TODO: adding an edge \(e=(u,v)\) creates a cycle, find the path from \(u\) to \(v\) that does not go through \(e\), find the edge with highest weight in this path and remove it.
-- TODO: refer to lemma_1
-- TODO: pseudocode
+**Input**:
+
+- Subtree \(T\) of graph \(G\) that is guaranteed to be a minimum spanning tree.
+- Weight function \(w:E→ℝ\)
+- The vertices \(u,v∈T\) which form an edge \(e=(u,v)\) that the algorithm adds to the graph.
+
+**Output**: New subtree \(T'\) of \(G'=(V,E∪\{e\})\) that is guaranteed to be a minimum spanning tree.
+
+\(\operatorname{MST-Update}(T,w,u,v)\)
+
+1) \(P = \operatorname{Find-Path}(T,u,v)\)
+2) \(e' = \operatorname{Find-Maximum-Weighted-Edge}(P, w)\)
+3) \(e = (u,v)\)
+4) **if** \(w(e') ≤ w(e)\)
+5) ___ \(T' = T\)
+6) **else**
+7) ___ \(T' = (T ∩ e') ∪ e\)
+
+\(\operatorname{MST-Update}\) algorithm is based on the observation that adding a new edge to a tree will create a cycle in it. If any one edge is removed from this cycle the graph will become a tree again. Since the algorithm has to maintain minimum total weight it must remove an edge with the highest weight. See \(\ref{lemma_1}\).
+
+The \(\operatorname{Find-Path}\) operation outputs a set of edges \(P\) that form a path from \(u\) to \(v\) in the tree \(T\). It can be implemented using for example Breadth-first search (BFS) which has worst-case performance of \(O(|V|+|E|)\).
+
+The \(\operatorname{Find-Maximum-Weighted-Edge}\) operation outputs an edge \(e'\) with the highest weight from a set of edges \(P\) measured by the weight function \(w\). It is a linear time operation and depends on the size of the input set \(O(|P|)\).
+
+In lines 3-7 the algorithm compares the weight of the edge \(e'\) with the highest weight on the path \(P\) to the weight of the edge \(e=(u,v)\). If the weight \(w(e)\) is higher or equal than \(w(e')\) the tree remains unchanged, otherwise the algorithm removes the edge \(e'\) from the graph and add the edge \(e\) to the graph.
 
 
 ## Appendices
