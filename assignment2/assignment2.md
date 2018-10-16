@@ -1,7 +1,7 @@
 ---
 title: Home Assignment 2
 author: Jaan Tollander de Balsch
-date: 2018-10-10
+date: \today
 ---
 ## Question 1: Application to Graph Search
 You are given an undirected graph \(G=(V,E)\) where \(V\) is a list of cities and \(E\) is the road pattern between them. The road \(e=\{u,v\}\) connects city \(u\) and city \(v\), and you know its distance in kilometre \(l(e)\). You want to drive from city \(s\) to city \(t\). You own a small car which can only hold enough gas to cover \(Q\,\mathrm{km}\). There is a gas station in each city, but not between cities. Therefore, you can only take a route if every one of its edges has length at most \(Q\).
@@ -210,18 +210,9 @@ Where \(∘\) denotes concatenation. Runtime of this algorithm is linear \(O(|X|
 5) **else**
 6) ___ **return** \(⁠A_1\)
 
-TODO: clean up the explanation
+Figure 2.3 in [@algorithms_book, ch. 2.2, pg. 59] visualizes recurrence relations in divide-and-conquer algorithm. The depth of the recurrence relation in \(\operatorname{Merge-Sort-Arrays}\) is \(\log_2 k\), i.e., there are \(k\) sorted arrays and the operation splits the problem into half each recusive call until it reaches the base case and starts merging the arrays.
 
-Figure 2.3 in [@algorithms_book, ch. 2.2, pg. 59] visualizes recurrence relations in divide-and-conquer algorithm. The depth of the recurrence relation in \(\operatorname{Merge-Sort-Arrays}\) is \(\log_2 k\). The total computational complexity of the all the \(\operatorname{Merge}\) operations in each level has complexity \(O(n)\).
-
-1) \(O(n_1+n_2) + … O(n_{k-1}+n_k)∈O(n)\)
-2) \(O((n_1+n_2)+(n_3+n_4)) + … O((n_{k-3}+n_{k-2}) + (n_{k-1}+n_k))∈O(n)\)
-3) And so on upto
-
-* \(\sum_{n=1}^k n_i = n\)
-
-Therefore the computational complexity of the algorithm is \[O(n \log k).\]
-
+The total computational complexity of the all the \(\operatorname{Merge}\) operations in each recursive level of depth has complexity \(O(n)\). For example, at bottom level we merge arrays \[\operatorname{Merge}(A_1,A_2),…\operatorname{Merge}(A_{k-1},A_{k})\] which adds up to complexity of \[O(n_1+n_2) + … O(n_{k-1}+n_k)=O(n).\] At next level we would merge the arrays from the previous level, adding to computational complexity of \[O((n_1+n_2)+(n_3+n_4)) + … O((n_{k-3}+n_{k-2}) + (n_{k-1}+n_k))∈O(n).\] Since there are \(\log k\) levels, the computational complexity of the algorithm is \[O(n) O(\log k) = O(n \log k).\]
 
 
 ## Question 10: Minimum Spanning Trees with Updates
