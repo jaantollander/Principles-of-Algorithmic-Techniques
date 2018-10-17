@@ -121,6 +121,35 @@ Please see below a sample input where \(k=3\) lecture halls are enough to serve 
 
 ![](figures/lecture_hall_allocation.png)
 
+---
+
+The solution for the lecture hall allocation is given by *interval scheduling*.
+
+- https://en.wikipedia.org/wiki/Interval_scheduling
+
+**Input**: A set of intervals \(I=\{(s_i,t_i)∣i∈\{1,…,n\}\}\), where \(s_i\) denotes the starting time and \(t_i\) the ending time of an interval \(i\).
+
+**Output**: Minimum sized set of sets of non-overlapping intervals.
+
+\(\operatorname{Earliest-Deadline-First-Scheduling}(I)\)
+
+1) \(J = \operatorname{Sort-By-Finishing-Time}(I)\)
+2) \(S=∅\)
+3) **while** \(J≠∅\)
+4) ___ \(K=\operatorname{Find-Non-Overlapping-Intervals}(J[1], J-J[1])\)
+5) ___ \(J = J - K\)
+6) ___ \(S = S ∩ \{K\}\)
+6) **return** S
+
+\(\operatorname{Find-Non-Overlapping-Intervals}(x, C)\)
+
+1) \(C' = \operatorname{Remove-Overlapping}(x, C)\)
+1) **if** \(C' = ∅\)
+2) ___ **return** \(\{x\}\)
+3) **else**
+1) ___ \(x' = C'[1]\)
+2) ___ **return** \(\{x\} ∪ \operatorname{Find-Non-Overlapping-Intervals}(x', C'-x')\)
+
 
 ## Question 6: Label Placement
 You are given a collection of \(n\) rectangles (represented by the coordinates of their four corners) that lie in the strip of height \(2\) and length \(m\). Each rectangle has a height between \([1/3, 1]\) and can be arbitrarily long. See the image below.
