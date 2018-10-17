@@ -123,7 +123,7 @@ Please see below a sample input where \(k=3\) lecture halls are enough to serve 
 
 ---
 
-The solution for the lecture hall allocation is given by *interval scheduling*.
+The solution for the lecture hall allocation is given by *interval scheduling*. [@algorithm_design, ch. 4.1]
 
 - https://en.wikipedia.org/wiki/Interval_scheduling
 
