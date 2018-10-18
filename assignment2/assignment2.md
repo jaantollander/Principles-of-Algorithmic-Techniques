@@ -123,13 +123,35 @@ Please see below a sample input where \(k=3\) lecture halls are enough to serve 
 
 ---
 
-The solution for the lecture hall allocation is given by *interval scheduling*. [@algorithm_design, ch. 4.1]
+The lecture hall allocation problem can be solved using *interval scheduling*. Interval scheduling aims to partition intervals into sets of non-overlapping intervals. An optimal algorithm partitions them into minimum number of sets. An algorithm that can solve the interval scheduling problem optimally is a greedy algorithm called *earlist deadline first*, which is greedy in sense that it find the optimal solution by always choosing candidates by the smallest ending time,i.e, deadline. [@algorithm_design, ch. 4.1]
 
-- https://en.wikipedia.org/wiki/Interval_scheduling
+---
+
+A greedy algorithm for scheduling a single set of sorted intervals.
+
+**Input**: A set of intervals \(I\) sorted by finishing time.
+
+**Output**: A set of non-overlapping intervals \(S\).
+
+\(\operatorname{Find-Non-Overlapping-Intervals}(x, I)\)
+
+1) \((s,t) = x\)
+1) \(S = \{x\}\)
+1) **for** each \((s_i,t_i)∈I\)
+2) ___ **if** \(s_i≥t\)
+3) ___ ___ \(S = S ∪ \{(s_i,t_i)\}\)
+4) ___ ___ \((s,t) = (s_i,t_i)\)
+5) **return** \(S\)
+
+This algorithm runs in linear time \(O(|I|)\) dependent on the size of the set of intervals \(I\). It does not take into account the time of sorting the intervals \(I\), which is done when scheduling all intervals.
+
+---
+
+The full algorithm for scheduling all intervals \(I\) into non-overlapping sets of intervals.
 
 **Input**: A set of intervals \(I=\{(s_i,t_i)∣i∈\{1,…,n\}\}\), where \(s_i\) denotes the starting time and \(t_i\) the ending time of an interval \(i\).
 
-**Output**: Minimum sized set of sets of non-overlapping intervals.
+**Output**: Minimum sized set \(S\) of sets of non-overlapping intervals.
 
 \(\operatorname{Earliest-Deadline-First-Scheduling}(I)\)
 
@@ -138,17 +160,10 @@ The solution for the lecture hall allocation is given by *interval scheduling*. 
 3) **while** \(J≠∅\)
 4) ___ \(K=\operatorname{Find-Non-Overlapping-Intervals}(J[1], J-J[1])\)
 5) ___ \(J = J - K\)
-6) ___ \(S = S ∩ \{K\}\)
-6) **return** S
+6) ___ \(S = S ∪ \{K\}\)
+6) **return** \(S\)
 
-\(\operatorname{Find-Non-Overlapping-Intervals}(x, C)\)
-
-1) \(C' = \operatorname{Remove-Overlapping}(x, C)\)
-1) **if** \(C' = ∅\)
-2) ___ **return** \(\{x\}\)
-3) **else**
-1) ___ \(x' = C'[1]\)
-2) ___ **return** \(\{x\} ∪ \operatorname{Find-Non-Overlapping-Intervals}(x', C'-x')\)
+This algorithm runs in qudratic time \(O(n^2)\), because the while loop is bound to run \(O(n)\) times, finding overlapping intervals is also bound by \(O(n)\) and the sorting operation takes \(O(n \log n)\) time.
 
 
 ## Question 6: Label Placement
