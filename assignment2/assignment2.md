@@ -175,9 +175,36 @@ Design an algorithm efficiently finds the maximum subset of rectangles that do n
 
 
 ## Question 7: Smooth Non-decreasing Subsequence
-For a sequence of non-negative real numbers \(a_1,a_2,…,a_n\), we say that a subsequence \(a_1,a_2,…,a_{i_k}\) where \(i_1 < i_2 < … < i_k\) is non-decresing subsequence of length if \(a_{i_j}≤a_{i_{j+1}}\) for all \(1≤j < k\). Further, we say that such a subsequence is \(B\)-smooth if we have \(a_{i_{j+1}}-a_{i_j}≤B\) for all \(1≤j< k\).
+For a sequence of non-negative real numbers \(a_1,a_2,…,a_n\), we say that a subsequence \(a_{i_1},a_{i_2},…,a_{i_k}\) where \(i_1 < i_2 < … < i_k\) is non-decresing subsequence of length if \(a_{i_j}≤a_{i_{j+1}}\) for all \(1≤j < k\). Further, we say that such a subsequence is \(B\)-smooth if we have \(a_{i_{j+1}}-a_{i_j}≤B\) for all \(1≤j< k\).
 
 Describe a dynamic programming algorithm that takes as input the sequence \(a_1,…,a_n\) together with integer \(B\) and produces the longest \(B\)-smooth non-decreasing subsequence (i.e. find the one with maximum \(k\)). To receive full credits, clearly, define the DP table as well as the recurrence. Briefly analyze the running time of your algorithm.
+
+---
+
+Finding \(B\)-smooth subsequences can be solved by adapting the algorithm of finding longest increasing (non-decreasing) subsequences. [@algorithms_book, ch. 6.2]
+
+Construct the directed acyclic graph (DAG) \(G=(V,E)\) such the vertices are the indices \(V=\{i_1,...,i_n\}\) and there exists an edge between two vertices \((i_{j+1}, i_j)∈E\) if \[0≤a_{i_{j+1}}-a_{i_j}≤B.\] The DAG can be constructed as an adjacency list.
+<!-- If the edges are constructed in by iterating over the edges in order, the vertices in the adjacency list will also be in sorted order.  -->
+Since there are \(n\) vertices, the time complexity of constructing the DAG is \(O(n^2)\) because the every element in the sequence \(a_i\) needs to be compared against every element in the sequence that comes after it. This also means that the number of edges \(|E|\) is bound by \(O(n^2)\). The problem now is to find a the longest path in the DAG, record the predecessor vertices and then reconstruct the path.
+
+**Input**: Sequence of positive real numbers \(A=\(⟨a_1,a_2,…,a_n⟩\) and real number \(B\).
+
+**Output**: Longest \(B\)-smooth subsequence of sequence \(A\).
+
+\(\operatorname{Longest-Path-DAG}(A, B)\)
+
+1) Contruct the graph \(G=(V,E)\)
+2) Initialize arrays \(L\) and \(prev\) with \(NIL\) and to size \(n\).
+2) **for** \(j∈\{1,…,n\}\)
+3) ___ \(i = \operatorname{argmax}(L(i):(i,j)∈E)\)
+4) ___ \(prev(j) = i\)
+5) ___ \(L(j) = 1 + L(i)\)
+6) \(j = \operatorname{argmax} L(j)\)
+7) \(S=⟨j⟩\)
+8) **while** \(prev(j)≠NIL\)
+9) ___ \(j = prev(j)\)
+1) ___ \(\operatorname{Prepend}(S, j)\)
+7) **return** \(S\)
 
 
 ## Question 8: Catching Ameet's Mistake?
