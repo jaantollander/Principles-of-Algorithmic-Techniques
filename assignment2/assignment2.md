@@ -364,8 +364,7 @@ A good pseudocode about the implementation of the Dijkstra's algorithm and relat
 7) ___ **for** each vertex \(v∈G.Adj[u]\)
 8) ___ ___ \(\operatorname{Relax}(u,v,w)\)
 
-
-<!-- TODO: running time -->
+Dijkstra's algorithm runs in time \(O(|E| \log|V|)\) if min-priority queue is implemented using binary heap, which improves to \(O(|V|\log |V| + |E|)\) if it is implemented using Fibonacci heap.
 
 
 ## References
