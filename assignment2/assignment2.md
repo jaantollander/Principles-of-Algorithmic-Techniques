@@ -64,11 +64,7 @@ The algorithm computes the distance array \(D\) and then determines which edges 
 3) ___ **if** \(D[u] + w(u,v) = D[v]\)
 4) ___ ___ \(E' = E' ∪ \{(u,v)\}\)
 
-The algorithm runs in time \[O(T(|V|,|E|)) + O(|E|).\]
-
-TODO: \(O(T(|V|,|E|))\) can't be faster than linear time.
-
-TODO: why?
+The algorithm runs in time \[O(T(|V|,|E|)) + O(|E|) = O(T(|V|,|E|)).\] Since \(O(T(|V|,|E|))\) depends on the number of edges it cannot be faster than \(O(|E|)\).
 
 
 ## Question 3: Multiple Selection
@@ -369,7 +365,7 @@ A good pseudocode about the implementation of the Dijkstra's algorithm and relat
 8) ___ ___ \(\operatorname{Relax}(u,v,w)\)
 
 
-TODO: running time
+<!-- TODO: running time -->
 
 
 ## References
