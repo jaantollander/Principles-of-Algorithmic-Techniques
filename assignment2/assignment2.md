@@ -206,6 +206,8 @@ Since there are \(n\) vertices, the time complexity of constructing the DAG is \
 1) ___ \(\operatorname{Prepend}(S, j)\)
 7) **return** \(S\)
 
+The algorithms calls  \(\operatorname{argmax}(L(i):(i,j)∈E)\), which takes \(O(|E|) = O(n^2)\) time, \(n\) times making the total time complexity of \[O(n^3).\]
+
 
 ## Question 8: Catching Ameet's Mistake?
 Ameet proposed the following algorithm and claimed that the algorithm solves Minimum Spanning Trees (MST) problem. He bets 100 EUR that his algorithm would be correct. Would you bet against him? Either prove that he is correct to give a counterexample showing that he is not.
