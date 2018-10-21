@@ -187,7 +187,7 @@ Construct the directed acyclic graph (DAG) \(G=(V,E)\) such the vertices are the
 <!-- If the edges are constructed in by iterating over the edges in order, the vertices in the adjacency list will also be in sorted order.  -->
 Since there are \(n\) vertices, the time complexity of constructing the DAG is \(O(n^2)\) because the every element in the sequence \(a_i\) needs to be compared against every element in the sequence that comes after it. This also means that the number of edges \(|E|\) is bound by \(O(n^2)\). The problem now is to find a the longest path in the DAG, record the predecessor vertices and then reconstruct the path.
 
-**Input**: Sequence of positive real numbers \(A=\(⟨a_1,a_2,…,a_n⟩\) and real number \(B\).
+**Input**: Sequence of positive real numbers \(A=⟨a_1,a_2,…,a_n⟩\) and real number \(B\).
 
 **Output**: Longest \(B\)-smooth subsequence of sequence \(A\).
 
