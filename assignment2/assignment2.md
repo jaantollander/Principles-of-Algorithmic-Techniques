@@ -46,10 +46,6 @@ Assume that the running time of this sub-routine is always at most \(T(n,m)\) on
 ### Part 1
 You are given an input directed graph \(G=(V, E)\), source \(s∈V\), and a weight function \(w\) for which there is exactly one edge \(e∈E\) with a negative weight. Assume that there is no negative cycle. Describe an algorithm that computes shortest paths from \(s\) to each vertex in \(V\) in time \(O(T(|V|,|E|))\).
 
-### Part 2
-You are given an input directed graph \(G=(V,E)\), source \(s∈V\), and a weight function \(w\) for which there are exactly \(k\) edges \(e∈E\) with negative weight. Assume that there is no negative cycle. Describe an algorithm that computes shortest paths from \(s\) to each vertex in \(V\) in time \(O((k+1)! T(|V|,|E|))\).
-
-
 ---
 
 The algorithm computes the distance array \(D\) and then determines which edges \((u,v)∈E\) belong to the shortest path tree by checking if the distance to \(u\) added with the weight of the edge \((u,v)\) equals the distance to \(v\).
@@ -67,12 +63,24 @@ The algorithm computes the distance array \(D\) and then determines which edges 
 The algorithm runs in time \[O(T(|V|,|E|)) + O(|E|) = O(T(|V|,|E|)).\] Since \(O(T(|V|,|E|))\) depends on the number of edges it cannot be faster than \(O(|E|)\).
 
 
+### Part 2
+You are given an input directed graph \(G=(V,E)\), source \(s∈V\), and a weight function \(w\) for which there are exactly \(k\) edges \(e∈E\) with negative weight. Assume that there is no negative cycle. Describe an algorithm that computes shortest paths from \(s\) to each vertex in \(V\) in time \(O((k+1)! T(|V|,|E|))\).
+
+---
+
+I couldn't figure out how the algorith for the second part differs from the first part.
+
+
 ## Question 3: Multiple Selection
 We discussed the method of \(\operatorname{selection}\) using \(O(n)\) comparisons. Recall that \(\operatorname{selection}(A, k)\) takes as input an unsorted array \(A\) and returns the \(k\)-th smallest elements in \(A\).
 
 Now, we are interested in doing multiple selection efficiently. Design an algorithm that takes array \(A\) together with integers \(1≤k_1≤k_2≤…≤k_m≤n\) and returns the \(k_i\)-th smallest elements for all \(i\). For instance, \(\operatorname{mult\_selection}(A, {1, n})\) is expected to return the minimum together with the maximum of elements in \(A\).
 
 Describe an algorithm for multiple selection that runs in time \(O(n \log(m+1))\).
+
+---
+
+???
 
 
 ## Question 4: Dijkstra's Modification
@@ -92,7 +100,7 @@ The values the \(usp\) array should be initialized to \(TRUE\).
 
 The \(\operatorname{Relax}\) function is modified such that when a vertex \(u\) is relaxed and if it finds a new lowest upper bound \(v.d > u.d + w(u,v)\), it sets the the corresponding value in the array \(ups\) to \(TRUE\). Since it is the first time it encounters this lowest value, it must be *unique* shortest path.
 
-On the other hand, if we encounter that new lowest upper bound \(v.d\) is equal to the sum of the upper bound of vertex \(u\) and weight of the edge \((u,v)\), \(u.d + w(u,v)\), it means that the algorithm has a possible found *non-unique* shortest path to the vertex \(v\).
+On the other hand, if we encounter that new lowest upper bound \(v.d\) is equal to the sum of the upper bound of vertex \(u\) and weight of the edge \((u,v)\), \(u.d + w(u,v)\), it means that the algorithm has found a possible *non-unique* shortest path to the vertex \(v\).
 
 \(\operatorname{Relax'}(u,v,w)\)
 
@@ -168,6 +176,10 @@ You are given a collection of \(n\) rectangles (represented by the coordinates o
 ![](figures/label_placement.png)
 
 Design an algorithm efficiently finds the maximum subset of rectangles that do not overlap. More formally, each rectangle is represented by the point set \([a,b]×[c,d]\), and two rectangles overlap if and only if their interiors have non-empty intersection.
+
+---
+
+???
 
 
 ## Question 7: Smooth Non-decreasing Subsequence
