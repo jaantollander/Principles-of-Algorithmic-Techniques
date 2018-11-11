@@ -2,6 +2,7 @@
 title: Home Assignment 2
 author: Jaan Tollander de Balsch
 date: \today
+header-includes: \usepackage{unicode-math}
 ---
 ## Question 1: Application to Graph Search
 You are given an undirected graph \(G=(V, E)\) where \(V\) is a list of cities and \(E\) is the road pattern between them. The road \(e=\{u,v\}\) connects city \(u\) and city \(v\), and you know its distance in kilometre \(l(e)\). You want to drive from city \(s\) to city \(t\). You own a small car which can only hold enough gas to cover \(Q\,\mathrm{km}\). There is a gas station in each city, but not between cities. Therefore, you can only take a route if every one of its edges has length at most \(Q\).
