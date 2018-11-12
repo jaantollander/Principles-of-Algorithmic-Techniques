@@ -5,10 +5,26 @@ date: \today
 header-includes: \usepackage{unicode-math}
 ---
 ## 1.1 Independent Set on Trees
-- recurse top down depthwise
-- mark element to belong to independent set if possible
+![Two examples of independent sets on trees. The figure visualizes the depth of the tree, the values inside the vertices denote the value of the function \(I(u)\) for that vertex and the darkened vertices that belong to the independent set. \label{fig1}](figures/independent_set_on_trees.png)
 
-[@algorithms_book, ch. 6.7]
+The subproblem for the independent set on tree problem is given as [@algorithms_book, ch. 6.7]
+
+\[
+I(u) = \text{size of largest independent set of subtree hanging from } u
+\]
+
+The recursive formula
+
+\begin{equation}
+I(u) = \max \left\{1+\sum_{\text{grandchildren } w \text{ of } u} I(w), \sum_{\text{chilren } w \text{ of } u} I(w)\right\}.
+\label{largest-subtree}
+\tag{largest-subtree}
+\end{equation}
+
+If vertex \(u\) has no chilren and therefore no grandchildren then \(I(u)=1\) because the sums in the formula have value \(0\). This means that all leaf vertices belong to the independent set. For  non-leaf vertices, only those vertices whose none of their chilren belong to the independent set, belong to the independent set.
+
+The linear time nature \(O(|V|+|E|)\) of the algorithm can be seen from the figure \ref{fig1}. By starting the recursion from the root vertex, the recursion will continue until the top of the tree is reached, then it will start folding back and computing the value for the function \(\eqref{largest-subtree}\). The algorithm can also be modified to mark whether it belongs to the independent set or not by the rules mentioned above. The independent set can then be reconstructed by collecting all the marked vertices.
+
 
 ## 1.2 Mr. Trump's Study Planning
 Given a set of courses \(\{1,…,n\}\) let \[S=\{c_1,…,c_n\}\] be a set where \(c_i∈ℕ\) is a positive integer denoting the credits avarded from a particular course.
