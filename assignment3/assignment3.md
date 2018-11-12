@@ -27,34 +27,38 @@ The linear time nature \(O(|V|+|E|)\) of the algorithm stems from its resemblens
 
 
 ## 1.2 Mr. Trump's Study Planning
-Given a set of courses \(\{1,…,n\}\) let \[S=\{c_1,…,c_n\}\] be a set where \(c_i∈ℕ\) is a positive integer denoting the credits avarded from a particular course.
-
-Penalty per semester \[p(x)=(30-x)^2,\] where \(x\) is the amount of credits awarded
+Given a set of courses \(\{1,…,n\}\) let \[S=\{c_1,…,c_n\}\] be a set where \(c_i∈ℕ\) is a positive integer denoting the credits avarded from a particular course. The penalty incurred per semester is defined \[p(x)=(30-x)^2,\] where \(x\) is the amount of credits received from that semester.
 
 ---
 
 An algorithm that will determine whether there is a way to complete the degree with zero penalty works as follows:
 
-Add elements to sum \(c_1 + c_2 + ... + c_i\) until
+1) Add elements to sum \(x = c_1 + c_2 + ... + c_i\) until:
 
-a) The penalty \(p\) of the sum equals to zero. Then from step 1, start adding elements to a new sum starting with element \(c_{i+1}\).
+    a) The penalty \(p(x)\) of the sum equals to zero (checks every time when new element is added). Then from step 1, start adding elements to a new sum starting from element \(c_{i+1}\) and repeat the loop.
 
-b) Run out of elements. If the penalty of the sum doesn't equal to zero there is no way to complete the degree with zero penalty. If it does equal to zero there is a way to complete the degree with zero penalty.
+    b) Run out of elements. If the penalty of the sum doesn't equal to zero there is no way to complete the degree with zero penalty. If it does equal to zero there is a way to complete the degree with zero penalty.
 
 ---
 
-Find a parition of set \(S\)
+Let the penalty of a set of elements be the penalty of the sum of its elements \[p(S') = p(\operatorname{sum}(S')).\]
+
+The objective is to find a partition of the set \(S = S_1 ∪ S_2 ∪ … ∪ S_k\) such that the sum of the penalties of the sets is minimized
+
+\[\min_{S_1, S_2, ..., S_k} p(S_1) + p(S_2) + ... + p(S_k).\]
+
+In this case, the partitions case must be disjoint and the elements in the paritions consecutive, i.e. the set \(S_1\) contains the elements \(c_1,c_2,…,c_{i_1}\) then set \(S_2\) contains the elements \(c_{i_1},c_{i_1+1}…,c_{i_2}\) and so forth. The problem can solved using dynamic programming approach similar to rod cutting [@introduction_to_algorithms, ch. 15.1]. The solution start with the recursive definition of the minimization
+
+...
 
 \[
-S = S_1 ∪ S_2 ∪ … ∪ S_k \\
-= \{c_1,...,c_{i_1}\} ∪ \{c_{i_1+1},...,\}
+r(S) = \min(p(S),
+r(\{s_1\}) + r(\{s_2,...s_n\}), \\
+r(\{s_1,s_2\}) + r(\{s_2,...s_n\}),..., \\
+r(\{s_1,...,s_{n-1}\}) + r(\{s_n\}))
 \]
 
-Find a partition of set \(S\) into sets \(S_1, S_2, …, S_k\) such that the sum of the penalties is minimized \[\sum_{i=1}^k p(\operatorname{sum}(S_i))\]
-
 <!-- \(p(\operatorname{sum}(S_i)) + p(\operatorname{sum}(S_{i+1}))\) vs \(p(\operatorname{sum}(S_i∪S_{i+1}))\) -->
-
-Rod cutting [@introduction_to_algorithms, ch. 15.1]
 
 
 ## 1.3 Nidia & Candies, Revisited
