@@ -27,7 +27,7 @@ The linear time nature \(O(|V|+|E|)\) of the algorithm stems from its resemblens
 
 
 ## 1.2 Mr. Trump's Study Planning
-Given a set of courses \(\{1,…,n\}\) let \[S=\{c_1,…,c_n\}\] be a set where \(c_i∈ℕ\) is a positive integer denoting the credits avarded from a particular course. The penalty incurred per semester is defined \[p(x)=(30-x)^2,\] where \(x\) is the amount of credits received from that semester.
+Given a set of courses \(\{1,…,n\}\) let \(S=\{c_1,…,c_n\}\) be a set where \(c_i∈ℕ\) is a positive integer denoting the credits avarded from a particular course. The penalty incurred per semester is defined \(p(x)=(30-x)^2,\) where \(x\) is the amount of credits received from that semester.
 
 ---
 
@@ -45,38 +45,84 @@ Let the penalty of a set of elements be the penalty of the sum of its elements \
 
 The objective is to find a partition of the set \(S = S_1 ∪ S_2 ∪ … ∪ S_k\) such that the sum of the penalties of the sets is minimized
 
-\[\min_{S_1, S_2, ..., S_k} p(S_1) + p(S_2) + ... + p(S_k).\]
+\begin{equation}
+\min_{S_1, S_2, ..., S_k} p(S_1) + p(S_2) + ... + p(S_k).
+\end{equation}
 
 In this case, the partitions case must be disjoint and the elements in the paritions consecutive, i.e. the set \(S_1\) contains the elements \(c_1,c_2,…,c_{i_1}\) then set \(S_2\) contains the elements \(c_{i_1},c_{i_1+1}…,c_{i_2}\) and so forth. The problem can solved using dynamic programming approach similar to rod cutting [@introduction_to_algorithms, ch. 15.1]. The solution start with the recursive definition of the minimization
 
-...
-
-\[
+\begin{equation}
+\begin{aligned}
 r(S) = \min(p(S),
 r(\{s_1\}) + r(\{s_2,...s_n\}), \\
 r(\{s_1,s_2\}) + r(\{s_2,...s_n\}),..., \\
 r(\{s_1,...,s_{n-1}\}) + r(\{s_n\}))
-\]
+\end{aligned}
+\end{equation}
+
+TODO: ...
 
 <!-- \(p(\operatorname{sum}(S_i)) + p(\operatorname{sum}(S_{i+1}))\) vs \(p(\operatorname{sum}(S_i∪S_{i+1}))\) -->
 
 
 ## 1.3 Nidia & Candies, Revisited
-Given a set of candies \[S=\{c_1,…,c_m\}\] where \(c_i∈ℕ\) is a positive integer denoting the calories in a particular candy and \[C=\operatorname{sum}(S)\] denotes the total amount of calories in all candies, divide candies between *two people* such that each one receives equal amount of calories. This means finding two *disjoint subsets* \(S'⊂S\) and \(S''⊂S\) such that their sums are equal \[\operatorname{sum}(S') = \operatorname{sum}(S'').\]
+Given a set of candies \(S=\{c_1,…,c_m\}\) where \(c_i∈ℕ\) is a positive integer denoting the calories in a particular candy and \(C=\operatorname{sum}(S)\) denotes the total amount of calories in all candies, divide candies between *two people* such that each one receives equal amount of calories. This means finding two *disjoint subsets* \(S'⊂S\) and \(S''⊂S\) such that their sums are equal \[\operatorname{sum}(S') = \operatorname{sum}(S'').\]
 
 ### Part 1
-If all candies are divided, the two subsets are  \(S'⊂S\) and \(S''=S-S'\) then \[\operatorname{sum}(S') = \operatorname{sum}(S'') = C/2.\] Therefore the algorithm needs to only find a subset \(S'\) whose sum equal to the constant \(C/2\).
+If all candies are divided, the two subsets are  \(S'⊂S\) and \(S''=S-S'\) then the sum equality becomes \[\operatorname{sum}(S') = \operatorname{sum}(S'') = C/2.\] Therefore the algorithm needs to only find a subset \(S'\) whose sum equal to a constant, \(C/2\) in this case. This problem is know as the [subset sum problem](https://en.wikipedia.org/wiki/Subset_sum_problem) which can be reduced to the *knapsack without repetition problem*. This can be done by setting the knapsack capacity to the constant and then checking if the obtained solution equals to the constant. [@algorithms_book, pg. 257 & ch. 6.4]
 
-This problem is know as the [subset sum problem](https://en.wikipedia.org/wiki/Subset_sum_problem) which can be solved using dynamic programming.
+The knapsack problem is formulated such that \(K(w,j)\) is the maximum value achievable using a knapsack of capacity \(w\) and items \(1,...,j\). Then the recursive formula
 
-- Special case of knapsack. Solve by solving the knapsack problem without repetition then check if the knapsack weights exactly the constant.
-- [@algorithms_book, pg. 257, ch. 6.4]
-- [@introduction_to_algorithms, ch. 35.5]
+\[
+K(w, j) = \max\{K(w-w_j, j-1)+v_j, K(w, j-1)\}.
+\]
+
+By setting the maximum capacity \(W=C/2\), weight of the items \(w_i=c_i\) and the values of the item \(v_i=c_i\) then solving \(K(w, j)\) and comparing it to \(C/2\). The algorithm has the same runtime as knapsack. \(O(nW)\), where \(n\) is the amount of items in the knapsack. In this case we have \[O(mC/2) = O(mC)\]
+
 
 ### Part 2
 - TODO: use the algorithm above
 - TODO: choose a set \(S'\) then try to find \(S''\) such that \(\operatorname{sum}(S'') = \operatorname{sum}(S')\). Think \(\operatorname{sum}(S')\) as constant.
 
+
+## 3.2 Wanchote Runs a Business
+The parameters
+
+- A set of items \(I=\{1,…,n\}\).
+- A set of customers \(C=\{1,…,m\}\).
+- Each customer \(i∈C\) has a budget \(B_i∈ℝ_+\) (positive real number).
+
+Each item has a price determined by the price function \[p:I→ℝ_+.\]
+
+Since each customer is only interested in buying the whole subset of items, i.e. all items \(1,…,n\), the total price of the set is the variable that needs to be determined. It is defined as
+
+\begin{equation}
+q=\sum_{i∈I} p(i).
+\end{equation}
+
+---
+
+If the prices must make every customer happy, i.e, every customer must be able to affort the whole set of item, the prices \(p\) must be set such that the total price of the set of items \(q\) is equal to the smallest budget
+
+\begin{equation}
+q=\min_{i∈C} B_i.
+\end{equation}
+
+---
+
+The profits of the sales depend on the number of customer who can affort the set of items \(B_i≥q\) and the price of the set of items \(q\). In order to maximize the profits ...
+
+\begin{equation}
+\max_{q∈B} q ⋅ |\{B_i≥q ∣ i∈C\}|
+\end{equation}
+
+where \(B\) is a set of all budgets. An algorithm that would first sort the set of all budgets can be formulated to have complexity of \(O(|B|\log|B|)\).
+
+TODO: linear program \(q ⋅ i\) ... ?
+
+---
+
+A trivial example of where the profit is \(1000\) times higher when optimizing for profits instead of making customers happy. For example, if we have budgets \(B=\{1, 2000\}\) then by trying to make all customers happy the price is set to \(1\) and the profit will be \(2⋅1=2\). On the other hand if the price is set to \(2000\) only one of the customer will be able to affort but the profit will be \(1⋅2000=2000\).
 
 
 ## References
