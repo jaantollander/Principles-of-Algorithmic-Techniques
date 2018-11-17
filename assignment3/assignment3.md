@@ -85,6 +85,51 @@ By setting the maximum capacity \(W=C/2\), weight of the items \(w_i=c_i\) and t
 - TODO: choose a set \(S'\) then try to find \(S''\) such that \(\operatorname{sum}(S'') = \operatorname{sum}(S')\). Think \(\operatorname{sum}(S')\) as constant.
 
 
+## 2.1 Verification Problem
+Given a flow network \(G=(V,E)\) with source \(s\), sink \(t\), capacity \(c\) and flow \(f\), according to the *max-flow min-cut theorem*, the flow \(f\) is maximal if the residual network \(G_f\) contains no augmenting paths. [@introduction_to_algorithms, ch. 26]
+
+The *residual capacity* is defined by
+
+\[
+c_f(u,v) =
+\begin{cases}
+c(u,v) - f(u,v) & (u,v)∈E, \\
+f(v,u) & (v,u)∈E, \\
+0 & \text{otherwise.}
+\end{cases}
+\tag{residual-capacity}
+\label{residual-capacity}
+\]
+
+The residual network \(G_f=(V,E_f)\) induces by \(f\) where
+
+\[
+E_f = \{(u,v)∈V×V:c_f(u,v)>0\}.
+\tag{residual-edges}
+\label{residual-edges}
+\]
+
+The number of residual edges is bounded by \(|E_f|≤2|E|.\)
+
+An *augmenting path* \(p\) is a simple path from \(s\) to \(t\) in the residual network \(G_f\). It determines how much the flow can be increased on this path. If no augmenting paths exists, the flow \(f\) cannot be increased.
+
+<!-- \[
+c_f(p) = \min\{c_f(u,v):(u,v) \text{ is on } p\}
+\] -->
+
+The algorithm consists of two steps:
+
+1) Construct the residual network \(G_f\) which requires constructing the edges \(E_f\). Combining equations \(\eqref{residual-capacity}\) and \(\eqref{residual-edges}\) an efficient algorithm can construct the edges in \(O(|E|)\) time.
+
+2) Find a path from the source \(s\) to the sink \(t\) in \(G_f=(V,E_f)\). If a path is found algorithms reports `NO` and if path is not found it report `YES`. This can be done using a graph search such as DFS or BFS which run in time \(O(|V|+|E_f|)=O(|V|+|E|).\)
+
+The combined runtime of the algorithms is \(O(|V|+|E|).\)
+
+
+## 2.4 Maximum Flow with Updates
+Given a flow network \(G=(V,E)\) with source \(s\), sink \(t\), capacity \(c\) and flow \(f\) and corresponding residual network \(G_f\). If capacity \(c(u,v)\) for edge \((u,v)∈E\) is increased by one, the corresponding capacity of the residul network \(c_f(u,v)\) also increases by one according to \(\eqref{residual-capacity}\). If the previous residual capacity for this edge was \(0\), then it means that there is a new edge in the residual network given by \(\eqref{residual-edges}\) and therefore new augmenting path \(p\). Find the new augmenting path using graph search like DFS and BFS and augment the flow in the path \(p\) to update the flow to the new maximum. The graph search has runtime \(O(|V|+|E_f|)=O(|V|+|E|)\) and the augmentation depends on the length of the path \(p\) which is limited by the number of edges in the residual graph \(O(|E_f|)=O(|E|)\) and therefore the runtime of the whole algorithm is \(O(|V|+|E|).\) [@introduction_to_algorithms, ch. 26]
+
+
 ## 3.2 Wanchote Runs a Business
 The parameters
 
