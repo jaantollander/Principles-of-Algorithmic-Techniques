@@ -126,6 +126,51 @@ The algorithm consists of two steps:
 The combined runtime of the algorithms is \(O(|V|+|E|).\)
 
 
+## 2.2 Uncrossing Minimum Cuts
+The *capacity* of the cut \((S,T)\) is
+\[
+c(S,T) = \sum_{u∈S}\sum_{v∈T} c(u,v)
+\]
+
+A *minimum cut* of a network is a cut whose capacity is minimum over all cuts of the network.
+
+- properties of capacity? \(c(u,v)=c(v,u)\)?
+- properties of sum?
+- TODO: try using net flow over the cut? Flow can be negated f = sum1 - sum2 -> -f = sum2 - sum1
+
+Let \((S,T)\) and \((S',T')\) be two minimum cuts in graph \(G\). Then ...
+
+\[
+c(S,T) = c(S',T')
+\]
+
+<!-- ---
+
+\[
+S = (S∩S')∪(S∩T') \\
+T = (T∩T')∪(S'∩T)
+\] -->
+
+---
+
+A, B, C, and D are disjoint, capacity
+
+\[
+c(A∪B, C∪D) = c(A∪D, B∪C) \\
+c(A,C) + c(A,D) + c(B,C) + c(B,D) = c(A,B) + c(A,C) + c(D,B) + c(D,C)
+\]
+
+...
+
+\[
+c(A, B∪C∪D) = c(A∪B∪D, C)
+\]
+
+
+## 2.3 Unique Minimum Cuts
+An algorithm that determines if a minimum cut \((S,T)\) on a flow network is unique by iterating over the edges in the cut \(E'=(u,v)\) where \(u∈S\) and \(v∈T\), increasing the capacity of this edge temporarily and then computing the new maximum flow. If there exists an edge \(E'\) where the maximum flow was not increased then the minimum cut is not unique. This is because increasing the capacity of an single edge in the cut increases the capacity of the cut and if the cut is unique the maximum flow will increase for all edges \(E'\). [@unique_min_cut]
+
+
 ## 2.4 Maximum Flow with Updates
 Given a flow network \(G=(V,E)\) with source \(s\), sink \(t\), capacity \(c\) and flow \(f\) and corresponding residual network \(G_f\). If capacity \(c(u,v)\) for edge \((u,v)∈E\) is increased by one, the corresponding capacity of the residul network \(c_f(u,v)\) also increases by one according to \(\eqref{residual-capacity}\). If the previous residual capacity for this edge was \(0\), then it means that there is a new edge in the residual network given by \(\eqref{residual-edges}\) and therefore new augmenting path \(p\). Find the new augmenting path using graph search like DFS and BFS and augment the flow in the path \(p\) to update the flow to the new maximum. The graph search has runtime \(O(|V|+|E_f|)=O(|V|+|E|)\) and the augmentation depends on the length of the path \(p\) which is limited by the number of edges in the residual graph \(O(|E_f|)=O(|E|)\) and therefore the runtime of the whole algorithm is \(O(|V|+|E|).\) [@introduction_to_algorithms, ch. 26]
 
