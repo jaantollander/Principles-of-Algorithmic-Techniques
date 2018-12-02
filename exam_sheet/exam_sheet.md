@@ -121,3 +121,20 @@ Elements of dynamic programming:
 
 
 # NP and Reductions
+- **NP** class of all search problems.
+- **P** class of all search problems that can be solved in polynomial time.
+- **P\(≠\)NP** Are there search problems that cannot be solved in polynomial time?
+- A search problem is **NP-complete** if all other search problems reduce to it.
+- All problems in **NP** reduce to CIRCUIT SAT which reduces to SAT.
+
+
+**Satisfiability (SAT)** is a problem of finding a **satisfying truth assignment** to a boolean formula. For boolean formula in conjunctive normal form (CNF) \[(x∨y∨z)∧(x∨¬y)∧(y∨¬z)∧(z∨¬x)∧(¬x∨¬y∨¬z)\] a satisfying assignment is an assignment of `false` or `true` to each variable so that every clause contains a literal whose value is `true`.
+
+A **search problem** is specified by an algorithm \(\mathcal{C}\) that takes two inputs, an instance \(I\) and a proposed solution \(S\), and runs in time polynomial in \(|I|\). We say \(S\) is a solution to \(I\) if and only if \(\mathcal{C}(I, S)=true\).
+
+A **reduction** from search problem \(A\) to search problem \(B\):
+
+![](figures/reduction.png)
+
+1) \(f\) is a *polynomial-time algorithm* that transforms any instance \(I\) of \(A\) into an instance of \(B\).
+2) \(h\) is a *polynomial-time algorithm* that maps any solution \(S\) of \(f(I)\) of back into a solution \(h(S)\) of \(I\).
