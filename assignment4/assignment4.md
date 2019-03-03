@@ -22,7 +22,7 @@ Prove that these three problems are equally hard. That is, show that if one of t
 - TODO: definition of independent set
 - TODO: how is it computed
 - related problems: clique, vertex cover
-- [@introduction_to_algorithms, pg. 1102]
+- [@introduction_to_algorithms, pg. 1102, ch. 34.5]
 
 \(\operatorname{Independent-Set}(G, k)\)
 
@@ -31,13 +31,13 @@ Prove that these three problems are equally hard. That is, show that if one of t
 
 \(\operatorname{Has-Independent-Set}(G,k)\)
 
-1) \(V'=\operatorname{k-Independent-Set}(G, k)\)
+1) \(V'=\operatorname{Independent-Set}(G, k)\)
 2) **return** \(\operatorname{is-non-empty}(V')\)
 
 \(\operatorname{Max-Independent-Set}(G)\)
 
 1) \(k=1\)
-2) **while** \(\operatorname{Has-k-Independent-Set}(G,k)\)
+2) **while** \(\operatorname{Has-Independent-Set}(G,k)\)
 3) ___ \(k = k + 1\)
 4) **return** \(k\)
 
